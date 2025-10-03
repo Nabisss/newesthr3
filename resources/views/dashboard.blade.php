@@ -143,7 +143,7 @@
                 </button>
                 <a href="#" class="flex items-center ms-2 md:me-24">
                     <img src="{{ asset('images/logo.png') }}" class="h-8 me-2" alt="Logo">
-                    <span class="self-center text-xl font-extrabold sm:text-2xl whitespace-nowrap text-white">CaliCrane</span>
+                    <span class="self-center text-xl font-extrabold sm:text-2xl whitespace-nowrap text-white">CaliCrane TESTING</span>
                 </a>
             </div>
 
