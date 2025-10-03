@@ -4,9 +4,9 @@ session_start();
 
 // Database configuration
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'calicrane_training');
-define('DB_USER', 'root');
-define('DB_PASS', ''); // Keep empty if no password, otherwise add your password
+define('DB_NAME', 'hr2_hr2db');
+define('DB_USER', 'hr2_hr2db');
+define('DB_PASS', 'hr2db'); // Keep empty if no password, otherwise add your password
 
 // Create database connection
 function getDB() {
