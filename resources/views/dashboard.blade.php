@@ -313,7 +313,7 @@
                     </div>
                     <ul id="training-submenu" class="submenu pl-11 close">
                         <li class="my-2">
-                            <a href="hr2/training/coursemanagement.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition bg-blue-0">Course Management</a>
+                            <a href="/hr2/training/coursemanagement.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition bg-blue-0">Course Management Test</a>
                         </li>
                         <li class="my-2">
                             <div class="flex items-center justify-between p-2 rounded-lg hover:bg-blue-900 transition cursor-pointer" onclick="toggleSubmenu('learning-submenu')">
