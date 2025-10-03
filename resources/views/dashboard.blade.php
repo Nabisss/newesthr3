@@ -143,7 +143,7 @@
                 </button>
                 <a href="#" class="flex items-center ms-2 md:me-24">
                     <img src="{{ asset('images/logo.png') }}" class="h-8 me-2" alt="Logo">
-                    <span class="self-center text-xl font-extrabold sm:text-2xl whitespace-nowrap text-white">CaliCrane TESTING</span>
+                    <span class="self-center text-xl font-extrabold sm:text-2xl whitespace-nowrap text-white">CaliCrane</span>
                 </a>
             </div>
 
@@ -282,7 +282,7 @@
     <div class="h-full px-4 pb-4 overflow-y-auto bg-black shadow">
         <!-- Title -->
         <div class="flex justify-center items-center mb-6">
-            <h1 class="text-3xl font-bold text-white tracking-wide">Human Resource 2 TEST</h1>
+            <h1 class="text-3xl font-bold text-white tracking-wide">Human Resource 2</h1>
         </div>
 
         <!-- Navigation Links -->
@@ -313,7 +313,7 @@
                     </div>
                     <ul id="training-submenu" class="submenu pl-11 close">
                         <li class="my-2">
-                            <a href="https://hr2.cranecali-ms.com/hr2/training/coursemanagement.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition bg-blue-0">Course Management</a>
+                            <a href="hr2/training/coursemanagement.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition bg-blue-0">Course Management</a>
                         </li>
                         <li class="my-2">
                             <div class="flex items-center justify-between p-2 rounded-lg hover:bg-blue-900 transition cursor-pointer" onclick="toggleSubmenu('learning-submenu')">
