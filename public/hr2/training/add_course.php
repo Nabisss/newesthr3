@@ -19,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_course'])) {
     $description = trim($_POST['description']);
     $modules_count = intval($_POST['modules_count']);
     $is_safety_training = isset($_POST['is_safety_training']) ? 1 : 0;
-    $image_path = trim($_POST['image_path']);
 
     // Validate inputs
     if (empty($title) || empty($description) || $modules_count <= 0) {
@@ -27,10 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_course'])) {
         $message_type = "error";
     } else {
         try {
-            // Insert the new course
-            $stmt = $db->prepare("INSERT INTO courses (title, description, modules_count, is_safety_training, image_path, created_at) VALUES (?, ?, ?, ?, ?, NOW())");
+            // Insert the new course without image_path
+            $stmt = $db->prepare("INSERT INTO courses (title, description, modules_count, is_safety_training, created_at) VALUES (?, ?, ?, ?, NOW())");
 
-            if ($stmt->execute([$title, $description, $modules_count, $is_safety_training, $image_path])) {
+            if ($stmt->execute([$title, $description, $modules_count, $is_safety_training])) {
                 $course_id = $db->lastInsertId();
 
                 // Create default lessons based on modules_count
@@ -82,7 +81,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_course'])) {
             <form method="POST" action="">
                 <div class="mb-4">
                     <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Course Title *</label>
-                    <input type="text" id="title" name="title" value="<?php echo isset($_POST['title']) ? htmlspecialchars($_POST['title']) : ''; ?>" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="title" name="title" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select a course</option>
+                        <option value="Tools and Equipment Training Course" <?php echo (isset($_POST['title']) && $_POST['title'] == 'Tools and Equipment Training Course') ? 'selected' : ''; ?>>Tools and Equipment Training Course</option>
+                        <option value="Crane and Truck Training Course" <?php echo (isset($_POST['title']) && $_POST['title'] == 'Crane and Truck Training Course') ? 'selected' : ''; ?>>Crane and Truck Training Course</option>
+                        <option value="Customer Service Training Course" <?php echo (isset($_POST['title']) && $_POST['title'] == 'Customer Service Training Course') ? 'selected' : ''; ?>>Customer Service Training Course</option>
+                    </select>
                 </div>
 
                 <div class="mb-4">
@@ -94,13 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_course'])) {
                     <label for="modules_count" class="block text-sm font-medium text-gray-700 mb-1">Number of Modules *</label>
                     <input type="number" id="modules_count" name="modules_count" min="1" value="<?php echo isset($_POST['modules_count']) ? htmlspecialchars($_POST['modules_count']) : '1'; ?>" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-
-                <div class="mb-4">
-                    <label for="image_path" class="block text-sm font-medium text-gray-700 mb-1">Image Path</label>
-                    <input type="text" id="image_path" name="image_path" value="<?php echo isset($_POST['image_path']) ? htmlspecialchars($_POST['image_path']) : 'images/course1.jpg'; ?>" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <p class="text-xs text-gray-500 mt-1">Default: images/course1.jpg</p>
-                </div>
-
                 <div class="mb-6">
                     <div class="flex items-center">
                         <input type="checkbox" id="is_safety_training" name="is_safety_training" value="1" <?php echo (isset($_POST['is_safety_training']) && $_POST['is_safety_training']) ? 'checked' : ''; ?> class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">

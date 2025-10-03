@@ -5,12 +5,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\LearningController;
+use App\Http\Controllers\ProfileController; // Add this line
+use App\Http\Controllers\SettingsController; // Add this line too for settings
 
 Route::get('/', [LandingController::class, 'main'])->name('landing');
 
-
 Route::get('/sendotp', function () {
-    // You can load a view or redirect elsewhere
     return view('auth.otp');
 });
 
@@ -34,7 +36,20 @@ Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 // Logout (must be POST)
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-//For Successfully registered users
+// For Successfully registered users
 Route::get('/success', function () {
     return view('auth.success');
 })->name('auth.success');
+
+// Training Management Routes
+Route::prefix('training')->group(function () {
+    Route::get('/course-management', [TrainingController::class, 'courseManagement'])->name('training.course-management');
+    Route::post('/course-management/enroll', [TrainingController::class, 'enrollCourse'])->name('training.enroll-course');
+});
+
+// Learning Management Routes
+Route::prefix('learning')->group(function () {
+    Route::get('/safety-training', [LearningController::class, 'safetyTraining'])->name('learning.safety-training');
+    Route::post('/safety-training/enroll', [LearningController::class, 'enrollSafetyCourse'])->name('learning.enroll-safety-course');
+    Route::get('/maintenance-inspection', [LearningController::class, 'maintenanceInspection'])->name('learning.maintenance-inspection');
+});

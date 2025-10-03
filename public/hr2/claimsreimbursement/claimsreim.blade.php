@@ -72,7 +72,7 @@
                     </svg>
                 </button>
                 <a href="#" class="flex items-center ms-2 md:me-24">
-                    <img src="{{ asset('images/logo.png') }}" class="h-8 me-2" alt="Logo">
+                    <img src="https://hr2.cranecali-ms.com/images/logo.png" class="h-8 me-2" alt="Logo">
                     <span class="self-center text-xl font-extrabold sm:text-2xl whitespace-nowrap text-white">CaliCrane</span>
                 </a>
             </div>
@@ -219,7 +219,7 @@
         <ul class="space-y-2 text-sm font-medium text-white">
             <!-- Dashboard -->
             <li>
-                <a href="http://127.0.0.1:8000/dashboard" class="flex items-center p-3 rounded-lg hover:bg-blue-900 transition">
+                <a href="https://hr2.cranecali-ms.com/dashboard" class="flex items-center p-3 rounded-lg hover:bg-blue-900 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-9 2v8m-4 4h14a2 2 0 002-2V10a2 2 0 00-2-2h-4l-2-2m-2 2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                     </svg>
@@ -254,9 +254,6 @@
                         <ul id="learning-submenu" class="submenu pl-6">
                             <li class="my-1">
                                 <a href="../learning/safetytraining.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition text-sm">Safety Training Module</a>
-                            </li>
-                            <li class="my-1">
-                                <a href="../learning/maintenanceinspect.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition text-sm">Maintenance and Inspection</a>
                             </li>
                         </ul>
                     </li>

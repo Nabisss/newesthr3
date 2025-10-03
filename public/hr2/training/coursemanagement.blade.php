@@ -110,44 +110,9 @@ $enrolled_course_ids = array_column($enrolled_courses, 'id');
             .tab-content.active {
                 display: block;
             }
-
-            /* Loading Screen Styles */
-            .loading-screen {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.9);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 9999;
-                transition: opacity 0.5s ease-out;
-            }
-
-            .loading-logo {
-                width: 120px;
-                height: 120px;
-                animation: pulse 1.5s infinite;
-            }
-
-            @keyframes pulse {
-                0% { transform: scale(0.95); opacity: 0.7; }
-                50% { transform: scale(1.1); opacity: 1; }
-                100% { transform: scale(0.95); opacity: 0.7; }
-            }
         </style>
     </head>
     <body>
-
-    <!-- Loading Screen -->
-    <div id="loadingScreen" class="loading-screen">
-            <div class="text-center">
-                <img src="<?php echo asset('images/logo.png'); ?>" alt="CaliCrane Logo" class="loading-logo mx-auto mb-4">
-                <p class="text-white text-xl font-semibold">Loading Course Management...</p>
-            </div>
-        </div>
 
     <!-- nav bar -->
     <nav class="fixed bg-[#111111] top-0 z-50 w-full shadow">
@@ -212,7 +177,7 @@ $enrolled_course_ids = array_column($enrolled_courses, 'id');
                                         </div>
                                         <div class="ml-3 flex-1">
                                             <p class="text-sm font-medium text-gray-900">Course Completion</p>
-                                            <p class="mt-1 text-sm text-gray-500">John Doe has completed the Crane Operation Basics course.</p>
+                                            <p class="mt-1 text-sm text-gray-500">John Smith has completed the Crane Operation Basics course.</p>
                                             <p class="mt-1 text-xs text-gray-400">5 hours ago</p>
                                         </div>
                                     </div>
@@ -308,7 +273,7 @@ $enrolled_course_ids = array_column($enrolled_courses, 'id');
             <ul class="space-y-2 text-sm font-medium text-white">
                 <!-- Dashboard -->
                 <li>
-                    <a href="http://127.0.0.1:8000/dashboard" class="flex items-center p-3 rounded-lg hover:bg-blue-900 transition">
+                    <a href="https://hr2.cranecali-ms.com/dashboard" class="flex items-center p-3 rounded-lg hover:bg-blue-900 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-9 2v8m-4 4h14a2 2 0 002-2V10a2 2 0 00-2-2h-4l-2-2m-2 2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                         </svg>
@@ -343,9 +308,6 @@ $enrolled_course_ids = array_column($enrolled_courses, 'id');
                             <ul id="learning-submenu" class="submenu pl-6">
                                 <li class="my-1">
                                     <a href="../learning/safetytraining.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition text-sm">Safety Training Module</a>
-                                </li>
-                                <li class="my-1">
-                                    <a href="../learning/maintenanceinspect.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition text-sm">Maintenance and Inspection</a>
                                 </li>
                             </ul>
                         </li>
@@ -461,7 +423,7 @@ $enrolled_course_ids = array_column($enrolled_courses, 'id');
             <div class="mb-6 border-b border-gray-200">
                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="course-tabs" role="tablist">
                     <li class="me-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 rounded-t-lg border-blue-600 text-blue-600" id="admin-tab" data-tab-target="admin-content" type="button" role="tab" aria-controls="admin-content" aria-selected="true">Admin</button>
+                        <button class="inline-block p-4 border-b-2 rounded-t-lg border-blue-600 text-blue-600" id="admin-tab" data-tab-target="admin-content" type="button" role="tab" aria-controls="admin-content" aria-selected="true">HR</button>
                     </li>
                     <li class="me-2" role="presentation">
                         <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="trainee-tab" data-tab-target="trainee-content" type="button" role="tab" aria-controls="trainee-content" aria-selected="false">Trainee</button>
@@ -532,16 +494,16 @@ $enrolled_course_ids = array_column($enrolled_courses, 'id');
                                         <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
                                             <img class="w-10 h-10 rounded-full object-cover" src="<?php echo asset('images/uploadprof.png'); ?>" alt="Jane image">
                                             <div class="ps-3">
-                                                <div class="text-base font-semibold">John Doe</div>
-                                                <div class="font-normal text-gray-500">john.doe@calicrane.com</div>
+                                                <div class="text-base font-semibold">John Smith</div>
+                                                <div class="font-normal text-gray-500">jsmith1992@gmail.com</div>
                                             </div>
                                         </th>
                                         <td class="px-6 py-4">Operations</td>
                                         <td class="px-6 py-4">
                                             <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
-                                                <option selected>Crane Operation Basics</option>
-                                                <option>Advanced Crane Safety</option>
-                                                <option>Maintenance Procedures</option>
+                                                <option selected>Tools and Equipment</option>
+                                                <option>Crane and Truck Monitoring</option>
+                                                <option>Customer Service</option>
                                             </select>
                                         </td>
                                         <td class="px-6 py-4">
@@ -559,25 +521,25 @@ $enrolled_course_ids = array_column($enrolled_courses, 'id');
                                                 <div class="h-2.5 w-2.5 rounded-full bg-yellow-500 me-2"></div> Pending
                                             </div>
                                         </td>
-                                        <td class="px-6 py-6">
-                                            <button class="font-medium text-blue-600 hover:underline">Edit</button>
-                                            <button class="font-medium text-red-600 hover:underline">Delete</button>
+                                        <td class="px-6 py-4">
+                                            <button class="font-medium text-blue-600 hover:underline">Save</button>
+                                            <button class="font-medium text-red-600 hover:underline ml-2">Remove</button>
                                         </td>
                                     </tr>
                                     <tr class="bg-white border-b hover:bg-gray-50">
                                         <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
                                             <img class="w-10 h-10 rounded-full object-cover" src="<?php echo asset('images/uploadprof.png'); ?>" alt="Jane image">
                                             <div class="ps-3">
-                                                <div class="text-base font-semibold">Jane Smith</div>
-                                                <div class="font-normal text-gray-500">jane.smith@calicrane.com</div>
+                                                <div class="text-base font-semibold">Maria Garcia</div>
+                                                <div class="font-normal text-gray-500">mariagarcia09@gmail.com</div>
                                             </div>
                                         </th>
-                                        <td class="px-6 py-4">Maintenance</td>
+                                        <td class="px-6 py-4">Customer Care</td>
                                         <td class="px-6 py-4">
                                             <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
-                                                <option>Crane Operation Basics</option>
-                                                <option selected>Advanced Crane Safety</option>
-                                                <option>Maintenance Procedures</option>
+                                                <option selected>Tools and Equipment</option>
+                                                <option>Crane and Truck Monitoring</option>
+                                                <option>Customer Service</option>
                                             </select>
                                         </td>
                                         <td class="px-6 py-4">
@@ -592,28 +554,28 @@ $enrolled_course_ids = array_column($enrolled_courses, 'id');
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex items-center">
-                                                <div class="h-2.5 w-2.5 rounded-full bg-blue-500 me-2"></div> In Progress
+                                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Completed
                                             </div>
                                         </td>
-                                        <td class="px-6 py-6">
-                                            <button class="font-medium text-blue-600 hover:underline">Edit</button>
-                                            <button class="font-medium text-red-600 hover:underline">Delete</button>
+                                        <td class="px-6 py-4">
+                                            <button class="font-medium text-blue-600 hover:underline">Save</button>
+                                            <button class="font-medium text-red-600 hover:underline ml-2">Remove</button>
                                         </td>
                                     </tr>
                                     <tr class="bg-white border-b hover:bg-gray-50">
                                         <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
-                                            <img class="w-10 h-10 rounded-full object-cover" src="<?php echo asset('images/uploadprof.png'); ?>" alt="Jese image">
+                                            <img class="w-10 h-10 rounded-full object-cover" src="<?php echo asset('images/uploadprof.png'); ?>" alt="Jane image">
                                             <div class="ps-3">
                                                 <div class="text-base font-semibold">Robert Johnson</div>
-                                                <div class="font-normal text-gray-500">robert.j@calicrane.com</div>
+                                                <div class="font-normal text-gray-500">robertj99@gmail.com</div>
                                             </div>
                                         </th>
                                         <td class="px-6 py-4">Safety</td>
                                         <td class="px-6 py-4">
                                             <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
-                                                <option>Crane Operation Basics</option>
-                                                <option>Advanced Crane Safety</option>
-                                                <option selected>Maintenance Procedures</option>
+                                                <option selected>Tools and Equipment</option>
+                                                <option>Crane and Truck Monitoring</option>
+                                                <option>Customer Service</option>
                                             </select>
                                         </td>
                                         <td class="px-6 py-4">
@@ -628,12 +590,12 @@ $enrolled_course_ids = array_column($enrolled_courses, 'id');
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex items-center">
-                                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Completed
+                                                <div class="h-2.5 w-2.5 rounded-full bg-blue-500 me-2"></div> In Progress
                                             </div>
                                         </td>
-                                        <td class="px-6 py-6">
-                                            <button class="font-medium text-blue-600 hover:underline">Edit</button>
-                                            <button class="font-medium text-red-600 hover:underline">Delete</button>
+                                        <td class="px-6 py-4">
+                                            <button class="font-medium text-blue-600 hover:underline">Save</button>
+                                            <button class="font-medium text-red-600 hover:underline ml-2">Remove</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -641,139 +603,297 @@ $enrolled_course_ids = array_column($enrolled_courses, 'id');
                         </div>
 
                         <!-- Pagination -->
-                        <div class="flex items-center justify-between pt-4" aria-label="Table navigation">
-                            <span class="text-sm font-normal text-gray-500">Showing <span class="font-semibold text-gray-900">1-3</span> of <span class="font-semibold text-gray-900">100</span></span>
-                            <ul class="inline-flex -space-x-px text-sm h-8">
-                                <li>
-                                    <a href="#" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700">Previous</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">1</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">2</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700">3</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">...</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">10</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700">Next</a>
-                                </li>
-                            </ul>
+                        <div class="flex items-center justify-between pt-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm text-gray-700">
+                                    Showing
+                                    <span class="font-semibold text-gray-900">1</span>
+                                    to
+                                    <span class="font-semibold text-gray-900">3</span>
+                                    of
+                                    <span class="font-semibold text-gray-900">100</span>
+                                    Entries
+                                </span>
+                            </div>
+                            <div class="inline-flex rounded-md shadow-sm">
+                                <button class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700">
+                                    Previous
+                                </button>
+                                <button class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700">
+                                    Next
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Trainee Content -->
                 <div id="trainee-content" class="tab-content">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <!-- In Progress Courses -->
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-bold text-gray-900 mb-4">In Progress Courses</h2>
-                            <?php if (count($in_progress_courses) > 0): ?>
-                                <?php foreach ($in_progress_courses as $course): ?>
-                                    <div class="mb-4 p-4 border border-gray-200 rounded-lg">
-                                        <div class="flex justify-between items-start mb-2">
-                                            <h3 class="font-semibold text-gray-900"><?php echo htmlspecialchars($course['title']); ?></h3>
-                                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">In Progress</span>
-                                        </div>
-                                        <p class="text-sm text-gray-600 mb-3">Enrolled: <?php echo date('M d, Y', strtotime($course['enrolled_at'])); ?></p>
-                                        <div class="w-full bg-gray-200 rounded-full h-2.5 mb-2">
-                                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: <?php echo $course['progress']; ?>%"></div>
-                                        </div>
-                                        <div class="flex justify-between items-center text-xs text-gray-500">
-                                            <span><?php echo $course['progress']; ?>% Complete</span>
-                                            <a href="#" class="text-blue-600 hover:underline">Continue Learning</a>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <p class="text-gray-500">No courses in progress.</p>
-                            <?php endif; ?>
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl font-bold text-gray-900">My Courses</h2>
+                            <div class="flex space-x-2">
+                                <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg text-sm font-medium transition">
+                                    Export Data
+                                </button>
+                            </div>
                         </div>
 
-                        <!-- Completed Courses -->
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-bold text-gray-900 mb-4">Completed Courses</h2>
-                            <?php if (count($completed_courses) > 0): ?>
-                                <?php foreach ($completed_courses as $course): ?>
-                                    <div class="mb-4 p-4 border border-gray-200 rounded-lg">
-                                        <div class="flex justify-between items-start mb-2">
-                                            <h3 class="font-semibold text-gray-900"><?php echo htmlspecialchars($course['title']); ?></h3>
-                                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Completed</span>
-                                        </div>
-                                        <p class="text-sm text-gray-600 mb-3">Completed: <?php echo date('M d, Y', strtotime($course['completed_at'] ?? $course['enrolled_at'])); ?></p>
-                                        <div class="flex justify-between items-center">
-                                            <span class="text-sm text-gray-500">Score: <?php echo $course['score'] ?? 'N/A'; ?></span>
-                                            <div class="flex space-x-2">
-                                                <a href="#" class="text-blue-600 hover:underline text-sm">View Certificate</a>
-                                                <a href="#" class="text-gray-600 hover:underline text-sm">Review</a>
-                                            </div>
-                                        </div>
+                        <!-- Course Stats -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <div class="flex items-center">
+                                    <div class="p-2 bg-blue-100 rounded-lg">
+                                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
                                     </div>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <p class="text-gray-500">No courses completed yet.</p>
-                            <?php endif; ?>
+                                    <div class="ml-4">
+                                        <h3 class="text-sm font-medium text-gray-600">Total Enrolled</h3>
+                                        <p class="text-2xl font-bold text-gray-900"><?php echo count($enrolled_courses); ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                                <div class="flex items-center">
+                                    <div class="p-2 bg-yellow-100 rounded-lg">
+                                        <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-sm font-medium text-gray-600">In Progress</h3>
+                                        <p class="text-2xl font-bold text-gray-900"><?php echo count($in_progress_courses); ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                <div class="flex items-center">
+                                    <div class="p-2 bg-green-100 rounded-lg">
+                                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-sm font-medium text-gray-600">Completed</h3>
+                                        <p class="text-2xl font-bold text-gray-900"><?php echo count($completed_courses); ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Course Tabs -->
+                        <div class="mb-6 border-b border-gray-200">
+                            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="my-courses-tabs" role="tablist">
+                                <li class="me-2" role="presentation">
+                                    <button class="inline-block p-4 border-b-2 rounded-t-lg border-blue-600 text-blue-600" id="in-progress-tab" data-tab-target="in-progress-content" type="button" role="tab" aria-controls="in-progress-content" aria-selected="true">In Progress</button>
+                                </li>
+                                <li class="me-2" role="presentation">
+                                    <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="completed-tab" data-tab-target="completed-content" type="button" role="tab" aria-controls="completed-content" aria-selected="false">Completed</button>
+                                </li>
+                                <li class="me-2" role="presentation">
+                                    <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="upcoming-tab" data-tab-target="upcoming-content" type="button" role="tab" aria-controls="upcoming-content" aria-selected="false">Upcoming</button>
+                                </li>
+                                <li class="me-2" role="presentation">
+                                    <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="available-tab" data-tab-target="available-content" type="button" role="tab" aria-controls="available-content" aria-selected="false">Available Courses</button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- My Courses Content -->
+                        <div id="my-courses-content">
+                            <!-- In Progress Courses -->
+                            <div id="in-progress-content" class="tab-content active">
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    <?php if (count($in_progress_courses) > 0): ?>
+                                        <?php foreach ($in_progress_courses as $course): ?>
+                                            <div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition">
+                                                <div class="p-6">
+                                                    <div class="flex justify-between items-start mb-4">
+                                                        <h3 class="text-lg font-bold text-gray-900"><?php echo htmlspecialchars($course['title']); ?></h3>
+                                                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">In Progress</span>
+                                                    </div>
+                                                    <p class="text-gray-600 text-sm mb-4"><?php echo htmlspecialchars($course['description']); ?></p>
+                                                    <div class="mb-4">
+                                                        <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                                            <span>Progress</span>
+                                                            <span><?php echo $course['progress']; ?>%</span>
+                                                        </div>
+                                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                                            <div class="bg-blue-600 h-2 rounded-full" style="width: <?php echo $course['progress']; ?>%"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex justify-between items-center">
+                                                        <span class="text-sm text-gray-500">Enrolled: <?php echo date('M d, Y', strtotime($course['enrolled_at'])); ?></span>
+                                                        <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">Continue</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <div class="col-span-full text-center py-8">
+                                            <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                            </svg>
+                                            <p class="text-gray-600">No courses in progress.</p>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <!-- Completed Courses -->
+                            <div id="completed-content" class="tab-content">
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    <?php if (count($completed_courses) > 0): ?>
+                                        <?php foreach ($completed_courses as $course): ?>
+                                            <div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition">
+                                                <div class="p-6">
+                                                    <div class="flex justify-between items-start mb-4">
+                                                        <h3 class="text-lg font-bold text-gray-900"><?php echo htmlspecialchars($course['title']); ?></h3>
+                                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Completed</span>
+                                                    </div>
+                                                    <p class="text-gray-600 text-sm mb-4"><?php echo htmlspecialchars($course['description']); ?></p>
+                                                    <div class="mb-4">
+                                                        <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                                            <span>Progress</span>
+                                                            <span>100%</span>
+                                                        </div>
+                                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                                            <div class="bg-green-600 h-2 rounded-full" style="width: 100%"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex justify-between items-center">
+                                                        <span class="text-sm text-gray-500">Completed: <?php echo date('M d, Y', strtotime($course['enrolled_at'])); ?></span>
+                                                        <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">View Certificate</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <div class="col-span-full text-center py-8">
+                                            <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            <p class="text-gray-600">No completed courses yet.</p>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <!-- Upcoming Courses -->
+                            <div id="upcoming-content" class="tab-content">
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    <?php if (count($upcoming_courses) > 0): ?>
+                                        <?php foreach ($upcoming_courses as $course): ?>
+                                            <div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition">
+                                                <div class="p-6">
+                                                    <div class="flex justify-between items-start mb-4">
+                                                        <h3 class="text-lg font-bold text-gray-900"><?php echo htmlspecialchars($course['title']); ?></h3>
+                                                        <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Upcoming</span>
+                                                    </div>
+                                                    <p class="text-gray-600 text-sm mb-4"><?php echo htmlspecialchars($course['description']); ?></p>
+                                                    <div class="mb-4">
+                                                        <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                                            <span>Starts</span>
+                                                            <span><?php echo date('M d, Y', strtotime($course['enrolled_at'])); ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex justify-between items-center">
+                                                        <span class="text-sm text-gray-500">Enrolled: <?php echo date('M d, Y', strtotime($course['enrolled_at'])); ?></span>
+                                                        <button onclick="viewCourseDetails(<?php echo $course['id']; ?>)" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                                        View Details
+                                                    </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <div class="col-span-full text-center py-8">
+                                            <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            <p class="text-gray-600">No upcoming courses.</p>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <!-- Available Courses -->
+                            <div id="available-content" class="tab-content">
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    <?php if (count($all_courses) > 0): ?>
+                                        <?php foreach ($all_courses as $course): ?>
+                                            <?php if (!in_array($course['id'], $enrolled_course_ids)): ?>
+                                                <div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition">
+                                                    <div class="p-6">
+                                                        <div class="flex justify-between items-start mb-4">
+                                                            <h3 class="text-lg font-bold text-gray-900"><?php echo htmlspecialchars($course['title']); ?></h3>
+                                                            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Available</span>
+                                                        </div>
+                                                        <p class="text-gray-600 text-sm mb-4"><?php echo htmlspecialchars($course['description']); ?></p>
+                                                        <div class="mb-4">
+                                                            <div class="flex items-center text-sm text-gray-600 mb-2">
+                                                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                                </svg>
+                                                                Duration: <?php echo $course['duration']; ?> hours
+                                                            </div>
+                                                            <div class="flex items-center text-sm text-gray-600">
+                                                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                                                </svg>
+                                                                Instructor: <?php echo htmlspecialchars($course['instructor']); ?>
+                                                            </div>
+                                                        </div>
+                                                        <form method="POST" class="mt-4">
+                                                            <input type="hidden" name="course_id" value="<?php echo $course['id']; ?>">
+                                                            <button type="submit" name="enroll_course" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                                                                Enroll Now
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <div class="col-span-full text-center py-8">
+                                            <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                            </svg>
+                                            <p class="text-gray-600">No available courses at the moment.</p>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <?php foreach($all_courses as $course): ?>
-    <?php
-    $is_enrolled = in_array($course['id'], $enrolled_course_ids);
-    $button_text = $is_enrolled ? 'Enrolled' : 'Enroll Now';
-    $button_class = $is_enrolled ?
-        'bg-gray-400 text-white px-3 py-2 rounded-lg text-sm cursor-not-allowed' :
-        'bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm font-medium transition';
-    ?>
-
-    <div class="bg-gray-50 border border-gray-200 rounded-lg shadow-sm">
-        <img class="rounded-t-lg w-full h-40 object-cover" src="<?php echo asset($course['image_path']); ?>" alt="<?php echo htmlspecialchars($course['title']); ?>">
-        <div class="p-5">
-            <h3 class="mb-2 text-lg font-bold tracking-tight text-gray-900"><?php echo htmlspecialchars($course['title']); ?></h3>
-            <p class="mb-3 text-sm text-gray-600"><?php echo htmlspecialchars($course['description']); ?></p>
-            <div class="flex justify-between items-center mb-3">
-                <span class="text-xs font-medium text-gray-500"><?php echo $course['modules_count']; ?> modules</span>
-                <?php if($course['is_safety_training']): ?>
-                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Safety Training</span>
-                <?php endif; ?>
+                </div>
             </div>
-
-            <?php if($is_enrolled): ?>
-            <button class="<?php echo $button_class; ?>" disabled>
-                <?php echo $button_text; ?>
-            </button>
-            <?php else: ?>
-            <form method="POST" action="">
-                <input type="hidden" name="course_id" value="<?php echo $course['id']; ?>">
-                <button type="submit" name="enroll_course" class="<?php echo $button_class; ?>">
-                    <?php echo $button_text; ?>
-                </button>
-            </form>
-            <?php endif; ?>
         </div>
     </div>
-    <?php endforeach; ?>
-</div>
-    <!-- content -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script>
-        // Toggle submenu function
-        function toggleSubmenu(id) {
-            const submenu = document.getElementById(id);
-            const arrow = document.getElementById(id.replace('-submenu', '-arrow'));
 
-            submenu.classList.toggle('open');
-            arrow.classList.toggle('rotate-0');
-            arrow.classList.toggle('rotate-90');
+        // View Course Details Function
+function viewCourseDetails(courseId) {
+    // Redirect to safety training page with course ID parameter
+    window.location.href = 'safetytraining.blade.php?course_id=' + courseId;
+}
+        // Toggle submenu function
+        function toggleSubmenu(submenuId) {
+            const submenu = document.getElementById(submenuId);
+            const arrow = document.getElementById(submenuId.replace('-submenu', '-arrow'));
+
+            if (submenu.classList.contains('open')) {
+                submenu.classList.remove('open');
+                arrow.classList.remove('rotate-90');
+                arrow.classList.add('rotate-0');
+            } else {
+                submenu.classList.add('open');
+                arrow.classList.remove('rotate-0');
+                arrow.classList.add('rotate-90');
+            }
         }
 
         // Toggle notification dropdown
@@ -785,85 +905,126 @@ $enrolled_course_ids = array_column($enrolled_courses, 'id');
         // Close notification dropdown when clicking outside
         document.addEventListener('click', function(event) {
             const dropdown = document.getElementById('notification-dropdown');
-            const button = event.target.closest('button');
+            const notificationBtn = event.target.closest('button[onclick="toggleNotification()"]');
 
-            if (!dropdown.contains(event.target) && button !== document.querySelector('[onclick="toggleNotification()"]')) {
+            if (!notificationBtn && !dropdown.contains(event.target)) {
                 dropdown.classList.remove('open');
             }
         });
 
         // Tab switching functionality
-        document.querySelectorAll('[data-tab-target]').forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = tab.getAttribute('data-tab-target');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Main tabs (HR/Trainee)
+            const mainTabs = document.querySelectorAll('#course-tabs button');
+            const mainTabContents = document.querySelectorAll('#tab-contents .tab-content');
 
-                // Update tab buttons
-                document.querySelectorAll('[data-tab-target]').forEach(t => {
-                    t.classList.remove('border-blue-600', 'text-blue-600');
-                    t.classList.add('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
-                });
-                tab.classList.add('border-blue-600', 'text-blue-600');
-                tab.classList.remove('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
+            mainTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-tab-target');
 
-                // Update tab contents
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
+                    // Update active tab
+                    mainTabs.forEach(t => {
+                        t.classList.remove('border-blue-600', 'text-blue-600');
+                        t.classList.add('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
+                    });
+                    this.classList.add('border-blue-600', 'text-blue-600');
+                    this.classList.remove('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
+
+                    // Update active content
+                    mainTabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(targetId.replace('#', '')).classList.add('active');
                 });
-                document.getElementById(target).classList.add('active');
+            });
+
+            // My Courses tabs
+            const myCoursesTabs = document.querySelectorAll('#my-courses-tabs button');
+            const myCoursesTabContents = document.querySelectorAll('#my-courses-content .tab-content');
+
+            myCoursesTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-tab-target');
+
+                    // Update active tab
+                    myCoursesTabs.forEach(t => {
+                        t.classList.remove('border-blue-600', 'text-blue-600');
+                        t.classList.add('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
+                    });
+                    this.classList.add('border-blue-600', 'text-blue-600');
+                    this.classList.remove('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
+
+                    // Update active content
+                    myCoursesTabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(targetId.replace('#', '')).classList.add('active');
+                });
+            });
+
+            // Update Philippine Time
+            function updatePhilippineTime() {
+                const options = {
+                    timeZone: 'Asia/Manila',
+                    hour12: true,
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                };
+                const formatter = new Intl.DateTimeFormat('en-PH', options);
+                document.getElementById('philippineTime').textContent = formatter.format(new Date());
+            }
+
+            // Update time immediately and every second
+            updatePhilippineTime();
+            setInterval(updatePhilippineTime, 1000);
+        });
+
+        // Search and filter functionality
+        document.getElementById('search-employees').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
             });
         });
 
-        // Philippine Time Display
-        function updatePhilippineTime() {
-            const options = {
-                timeZone: 'Asia/Manila',
-                hour12: true,
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric'
-            };
-            const formatter = new Intl.DateTimeFormat('en-PH', options);
-            const dateTimeParts = formatter.formatToParts(new Date());
-
-            let hour, minute, second, day, month, year, timePeriod;
-
-            for (const part of dateTimeParts) {
-                switch (part.type) {
-                    case 'hour': hour = part.value; break;
-                    case 'minute': minute = part.value; break;
-                    case 'second': second = part.value; break;
-                    case 'day': day = part.value; break;
-                    case 'month': month = part.value; break;
-                    case 'year': year = part.value; break;
-                    case 'dayPeriod': timePeriod = part.value; break;
-                }
-            }
-
-            document.getElementById('philippineTime').textContent =
-                `${month} ${day}, ${year} ${hour}:${minute}:${second} ${timePeriod}`;
-        }
-
-        setInterval(updatePhilippineTime, 1000);
-        updatePhilippineTime();
-
-        // Loading Screen
-        document.addEventListener('DOMContentLoaded', function() {
-            const loadingScreen = document.getElementById('loadingScreen');
-
-            // Show loading screen initially
-            loadingScreen.style.display = 'flex';
-
-            // Hide loading screen after 2 seconds
-            setTimeout(function() {
-                loadingScreen.style.opacity = '0';
-                setTimeout(function() {
-                    loadingScreen.style.display = 'none';
-                }, 500);
-            }, 2000);
+        document.getElementById('filter-department').addEventListener('change', function(e) {
+            filterTable();
         });
-</script>
-</body>
-</html>
+
+        document.getElementById('filter-status').addEventListener('change', function(e) {
+            filterTable();
+        });
+
+        function filterTable() {
+            const departmentFilter = document.getElementById('filter-department').value;
+            const statusFilter = document.getElementById('filter-status').value;
+            const rows = document.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+                const department = row.cells[1].textContent.toLowerCase();
+                const status = row.cells[5].textContent.toLowerCase();
+
+                const departmentMatch = !departmentFilter || department.includes(departmentFilter);
+                const statusMatch = !statusFilter || status.includes(statusFilter);
+
+                if (departmentMatch && statusMatch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
+    </body>
+    </html>

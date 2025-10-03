@@ -42,46 +42,6 @@
             display: block;
         }
 
-        /* Loading screen styles */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out;
-        }
-
-        .crane-loader {
-            width: 120px;
-            height: 120px;
-            position: relative;
-            animation: crane-lift 2s infinite ease-in-out;
-        }
-
-        .crane-loader img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        @keyframes crane-lift {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .loading-text {
-            color: white;
-            margin-top: 20px;
-            font-size: 1.2rem;
-            text-align: center;
-        }
-
         /* Claims Process Flowchart */
         .claims-flow {
             display: flex;
@@ -146,24 +106,29 @@
             color: #1e40af;
         }
 
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
         .chart-container {
             position: relative;
             height: 250px;
             margin-top: 1rem;
         }
+
+        .quick-action-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .quick-action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
     </style>
 </head>
 <body>
-
-   <!-- Loading Screen -->
-   <div id="loading-screen">
-        <div class="flex flex-col items-center">
-            <div class="crane-loader">
-                <img src="{{ asset('images/logo.png') }}" alt="CaliCrane Logo">
-            </div>
-            <p class="loading-text">Loading Dashboard...</p>
-        </div>
-    </div>
 
    <!-- nav bar -->
 <nav class="fixed bg-[#111111] top-0 z-50 w-full shadow">
@@ -173,7 +138,7 @@
                 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-white rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                     <span class="sr-only">Open sidebar</span>
                     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path clip-rule="evenodd" fill-rule="evenodd" d="M2 .75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+                    <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
                     </svg>
                 </button>
                 <a href="#" class="flex items-center ms-2 md:me-24">
@@ -228,7 +193,7 @@
                                     </div>
                                     <div class="ml-3 flex-1">
                                         <p class="text-sm font-medium text-gray-900">Course Completion</p>
-                                        <p class="mt-1 text-sm text-gray-500">John Doe has completed the Crane Operation Basics course.</p>
+                                        <p class="mt-1 text-sm text-gray-500">Maria Garcia has completed the Crane Operation Basics course.</p>
                                         <p class="mt-1 text-xs text-gray-400">5 hours ago</p>
                                     </div>
                                 </div>
@@ -282,12 +247,12 @@
 
                         <!-- Dropdown Links -->
                         <ul class="py-1" role="none">
-                            <li>
-                                <a href="{{ route('profile') }}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                    Profile
-                                </a>
-                            </li>
+                         <li>
+    <a href="{{ route('profile', ['email' => Auth::user()->email]) }}"
+    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+        Profile
+    </a>
+</li>
                             <li>
                                 <a href="{{ route('settings') }}"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
@@ -348,7 +313,7 @@
                     </div>
                     <ul id="training-submenu" class="submenu pl-11 close">
                         <li class="my-2">
-                            <a href="/hr2/training/coursemanagement.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition bg-blue-0">Course Management</a>
+                            <a href="https://hr2.cranecali-ms.com/hr2/training/coursemanagement.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition bg-blue-0">Course Management</a>
                         </li>
                         <li class="my-2">
                             <div class="flex items-center justify-between p-2 rounded-lg hover:bg-blue-900 transition cursor-pointer" onclick="toggleSubmenu('learning-submenu')">
@@ -360,9 +325,6 @@
                             <ul id="learning-submenu" class="submenu pl-6">
                                 <li class="my-1">
                                     <a href="/hr2/learning/safetytraining.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition text-sm">Safety Training Module</a>
-                                </li>
-                                <li class="my-1">
-                                    <a href="/hr2/learning/maintenanceinspect.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition text-sm">Maintenance and Inspection</a>
                                 </li>
                             </ul>
                         </li>
@@ -465,81 +427,57 @@
         <!-- breadcrumb -->
 
         <!-- Main Content -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <!-- Confirmed Employees Card -->
-            <div class="bg-gradient-to-r from-orange-600 to-orange-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer transform hover:scale-105" onclick="window.location.href='#'">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h2 class="text-2xl font-bold text-blue">3</h2>
-                        <p class="text-blue-10">Confirmed Employees</p>
-                    </div>
-                    <div class="bg-blue-500 p-3 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c 0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                    </div>
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="quick-action-card bg-white rounded-2xl shadow-lg p-6 text-center" onclick="window.location.href='/hr2/claimsreimbursement/claimsreim.blade.php'">
+                <div class="bg-blue-100 p-3 rounded-full w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
                 </div>
-                <div class="mt-4">
-                    <div class="flex items-center text-blue-150 text-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Updated 2 hours ago
-                    </div>
-                </div>
+                <h3 class="font-semibold text-gray-900">Submit New Claim</h3>
+                <p class="text-sm text-gray-600 mt-2">File a new reimbursement request</p>
             </div>
 
-            <!-- Employees in Training Card -->
-            <div class="bg-gradient-to-r from-purple-120 to-orange-500 rounded-2xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer transform hover:scale-105" onclick="window.location.href='#'">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h2 class="text-2xl font-bold text-black">4</h2>
-                        <p class="text-black-100">In Training</p>
-                    </div>
-                    <div class="bg-purple-500 p-3 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                        </svg>
-                    </div>
+            <div class="quick-action-card bg-white rounded-2xl shadow-lg p-6 text-center" onclick="window.location.href='https://hr2.cranecali-ms.com/dashboard'">
+                <div class="bg-green-100 p-3 rounded-full w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
                 </div>
-                <div class="mt-4">
-                    <div class="flex items-center text-purple-250 text-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Updated 2 hours ago
-                    </div>
-                </div>
+                <h3 class="font-semibold text-gray-900">View Status</h3>
+                <p class="text-sm text-gray-600 mt-2">Check your claim status</p>
             </div>
 
-            <!-- Employees Studying Card -->
-            <div class="bg-gradient-to-r from-green-600 to-orange-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer transform hover:scale-105" onclick="window.location.href='#'">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h2 class="text-2xl font-bold text-gray">6</h2>
-                        <p class="text-black-100">Currently Studying</p>
-                    </div>
-                    <div class="bg-green-400 p-3 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox=" 0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6" />
-                        </svg>
-                    </div>
+            <div class="quick-action-card bg-white rounded-2xl shadow-lg p-6 text-center" onclick="window.location.href='/hr2/training/coursemanagement.blade.php'">
+                <div class="bg-purple-100 p-3 rounded-full w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
                 </div>
-                <div class="mt-4">
-                    <div class="flex items-center text-green-150 text-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Updated 2 hours ago
-                    </div>
+                <h3 class="font-semibold text-gray-900">Training</h3>
+                <p class="text-sm text-gray-600 mt-2">Access training modules</p>
+            </div>
+
+            <div class="quick-action-card bg-white rounded-2xl shadow-lg p-6 text-center" onclick="window.location.href='/hr2/competency/compe.blade.php'">
+                <div class="bg-orange-100 p-3 rounded-full w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
                 </div>
+                <h3 class="font-semibold text-gray-900">Competency</h3>
+                <p class="text-sm text-gray-600 mt-2">View profile status</p>
             </div>
         </div>
 
         <!-- Claims and Reimbursement Process -->
         <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
-            <h2 class="text-xl font-bold text-gray-900 mb-4">Claims and Reimbursement Process</h2>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-900">Claims and Reimbursement Process</h2>
+                <button onclick="window.location.href='/hr2/claimsreimbursement/claimsreim.blade.php'" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition">
+                    Submit New Claim
+                </button>
+            </div>
 
             <!-- Flowchart -->
             <div class="claims-flow mb-6">
@@ -550,7 +488,7 @@
                         </svg>
                     </div>
                     <p class="flow-step-text">Submit Claim</p>
-                    <span class="flow-status status-pending">Pending</span>
+                    <span class="flow-status status-completed">Completed</span>
                 </div>
 
                 <div class="flow-connector" style="left: 12.5%; width: 25%;"></div>
@@ -570,11 +508,11 @@
                 <div class="flow-step">
                     <div class="flow-step-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <p class="flow-step-text">Approval</p>
-                    <span class="flow-status status-approved">Approved</span>
+                    <p class="flow-step-text">Approved</p>
+                    <span class="flow-status status-pending">Pending</span>
                 </div>
 
                 <div class="flow-connector" style="left: 62.5%; width: 25%;"></div>
@@ -582,65 +520,105 @@
                 <div class="flow-step">
                     <div class="flow-step-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                         </svg>
                     </div>
                     <p class="flow-step-text">Payment</p>
-                    <span class="flow-status status-completed">Completed</span>
+                    <span class="flow-status status-pending">Pending</span>
                 </div>
             </div>
 
-            <!-- Chart -->
-            <div class="chart-container">
-                <canvas id="claimsChart"></canvas>
+            <!-- Recent Claims -->
+            <div class="mt-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Claims</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3">Claim ID</th>
+                                <th class="px-4 py-3">Type</th>
+                                <th class="px-4 py-3">Amount</th>
+                                <th class="px-4 py-3">Date Submitted</th>
+                                <th class="px-4 py-3">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b hover:bg-gray-50">
+                                <td class="px-4 py-3 font-medium text-gray-900">CLM-001</td>
+                                <td class="px-4 py-3">Travel Expense</td>
+                                <td class="px-4 py-3">₱5,000.00</td>
+                                <td class="px-4 py-3">2024-01-15</td>
+                                <td class="px-4 py-3"><span class="flow-status status-approved">Approved</span></td>
+                            </tr>
+                            <tr class="bg-white border-b hover:bg-gray-50">
+                                <td class="px-4 py-3 font-medium text-gray-900">CLM-002</td>
+                                <td class="px-4 py-3">Medical</td>
+                                <td class="px-4 py-3">₱3,200.00</td>
+                                <td class="px-4 py-3">2024-01-18</td>
+                                <td class="px-4 py-3"><span class="flow-status status-pending">Under Review</span></td>
+                            </tr>
+                            <tr class="bg-white border-b hover:bg-gray-50">
+                                <td class="px-4 py-3 font-medium text-gray-900">CLM-003</td>
+                                <td class="px-4 py-3">Training</td>
+                                <td class="px-4 py-3">₱2,500.00</td>
+                                <td class="px-4 py-3">2024-01-20</td>
+                                <td class="px-4 py-3"><span class="flow-status status-rejected">Rejected</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <!-- Development Plan Burndown -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
-            <h2 class="text-xl font-bold text-gray-900 mb-4">Development Plan Burndown</h2>
-            <div class="chart-container">
-                <canvas id="burndownChart"></canvas>
-            </div>
-        </div>
-
-        <!-- Facility Section -->
+        <!-- Charts Section -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <!-- Facility Card 1 -->
-            <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer transform hover:scale-105" onclick="window.location.href='#'">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-xl font-bold text-gray-900">Training Facilities</h2>
-                    <div class="bg-blue-100 p-2 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-6 0H5m2 0h4M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                    </div>
-                </div>
-                <p class="text-gray-600 mb-4">Access our state-of-the-art training facilities designed for crane operation safety and skill development.</p>
-                <div class="flex items-center text-blue-600 text-sm">
-                    <span>View Facilities</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
+            <!-- Claims Status Chart -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Claims Status Overview</h3>
+                <div class="chart-container">
+                    <canvas id="claimsChart"></canvas>
                 </div>
             </div>
 
-            <!-- Facility Card 2 -->
-            <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer transform hover:scale-105" onclick="window.location.href='#'">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-xl font-bold text-gray-900">Equipment Resources</h2>
-                    <div class="bg-green-100 p-2 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
+            <!-- Reimbursement Trends -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Reimbursement Trends</h3>
+                <div class="chart-container">
+                    <canvas id="trendsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Training Progress -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Training Progress</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-blue-50 rounded-lg p-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-blue-800">Safety Training</span>
+                        <span class="text-sm font-bold text-blue-800">75%</span>
+                    </div>
+                    <div class="w-full bg-blue-200 rounded-full h-2">
+                        <div class="bg-blue-600 h-2 rounded-full" style="width: 75%"></div>
                     </div>
                 </div>
-                <p class="text-gray-600 mb-4">Explore our comprehensive equipment resources for maintenance training and operational excellence.</p>
-                <div class="flex items-center text-green-600 text-sm">
-                    <span>View Resources</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
+                <div class="bg-green-50 rounded-lg p-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-green-800">Crane Operation</span>
+                        <span class="text-sm font-bold text-green-800">90%</span>
+                    </div>
+                    <div class="w-full bg-green-200 rounded-full h-2">
+                        <div class="bg-green-600 h-2 rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="bg-purple-50 rounded-lg p-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-purple-800">Equipment Safety</span>
+                        <span class="text-sm font-bold text-purple-800">60%</span>
+                    </div>
+                    <div class="w-full bg-purple-200 rounded-full h-2">
+                        <div class="bg-purple-600 h-2 rounded-full" style="width: 60%"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -649,136 +627,157 @@
 </div>
 <!-- content -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
 <script>
-    // Toggle submenu function
+    // Sidebar toggle functionality
     function toggleSubmenu(id) {
         const submenu = document.getElementById(id);
-        const arrow = document.getElementById(id.split('-')[0] + '-arrow');
+        const arrow = document.getElementById(id.replace('-submenu', '-arrow'));
 
-        submenu.classList.toggle('open');
-        arrow.classList.toggle('rotate-0');
-        arrow.classList.toggle('rotate-90');
+        if (submenu.classList.contains('open')) {
+            submenu.classList.remove('open');
+            arrow.classList.remove('rotate-90');
+            arrow.classList.add('rotate-0');
+        } else {
+            submenu.classList.add('open');
+            arrow.classList.remove('rotate-0');
+            arrow.classList.add('rotate-90');
+        }
     }
 
-    // Notification dropdown toggle
+    // Notification toggle functionality
     function toggleNotification() {
         const notification = document.getElementById('notification-dropdown');
         notification.classList.toggle('open');
     }
 
-    // Close notification dropdown when clicking outside
+    // Close notification when clicking outside
     document.addEventListener('click', function(event) {
         const notification = document.getElementById('notification-dropdown');
-        const notificationBtn = event.target.closest('button');
+        const notificationBtn = event.target.closest('button[onclick="toggleNotification()"]');
 
-        if (!notification.contains(event.target) && notificationBtn && !notificationBtn.onclick) {
+        if (!notificationBtn && !notification.contains(event.target)) {
             notification.classList.remove('open');
         }
     });
 
     // Philippine Time Display
-    function updatePhilippineTime() {
-        const options = {
-            timeZone: 'Asia/Manila',
-            hour12: true,
-            hour: 'numeric',
-            minute: 'numeric',
-            second: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-        };
-        const formatter = new Intl.DateTimeFormat('en-PH', options);
-        const philippineTime = formatter.format(new Date());
-        document.getElementById('philippineTime').textContent = philippineTime;
-    }
+function updatePhilippineTime() {
+    const options = {
+        timeZone: 'Asia/Manila',
+        hour12: true,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit'
+    };
 
-    // Update time immediately and then every second
-    updatePhilippineTime();
-    setInterval(updatePhilippineTime, 1000);
+    const formatter = new Intl.DateTimeFormat('en-PH', options);
+    const parts = formatter.formatToParts(new Date());
 
-    // Loading screen functionality
-    window.addEventListener('load', function() {
-        setTimeout(function() {
-            const loadingScreen = document.getElementById('loading-screen');
-            loadingScreen.style.opacity = '0';
-            setTimeout(function() {
-                loadingScreen.style.display = 'none';
-            }, 500);
-        }, 1500); // Show loading screen for 1.5 seconds
+    let date = {}, time = {};
+    parts.forEach(part => {
+        if (part.type === 'month') date.month = part.value;
+        if (part.type === 'day') date.day = part.value;
+        if (part.type === 'year') date.year = part.value;
+        if (part.type === 'hour') time.hour = part.value;
+        if (part.type === 'minute') time.minute = part.value;
+        if (part.type === 'second') time.second = part.value;
+        if (part.type === 'dayPeriod') time.period = part.value;
     });
 
-    // Initialize charts
+    // Add dot after month abbreviation (e.g., "Oct." instead of "Oct")
+    if (date.month && !date.month.endsWith('.')) {
+        date.month += '.';
+    }
+
+    const timeString = `${time.hour}:${time.minute}:${time.second} ${time.period}`;
+    const dateString = `${date.month} ${date.day} ${date.year}`; // ✅ no slashes, only spaces
+
+    document.getElementById('philippineTime').textContent = `${dateString} ${timeString}`;
+}
+
+// Update time immediately and every second
+updatePhilippineTime();
+setInterval(updatePhilippineTime, 1000);
+    // Charts
     document.addEventListener('DOMContentLoaded', function() {
-        // Claims and Reimbursement Chart
+        // Claims Status Chart
         const claimsCtx = document.getElementById('claimsChart').getContext('2d');
         const claimsChart = new Chart(claimsCtx, {
-            type: 'bar',
+            type: 'doughnut',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                labels: ['Approved', 'Pending', 'Rejected', 'Under Review'],
                 datasets: [{
-                    label: 'Claims Submitted',
-                    data: [12, 19, 8, 15, 10, 7],
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }, {
-                    label: 'Claims Approved',
-                    data: [10, 15, 5, 12, 8, 6],
-                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
+                    data: [45, 25, 10, 20],
+                    backgroundColor: [
+                        '#10B981',
+                        '#F59E0B',
+                        '#EF4444',
+                        '#3B82F6'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Number of Claims'
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
                         }
                     }
-                }
+                },
+                cutout: '65%'
             }
         });
 
-        // Burndown Chart
-        const burndownCtx = document.getElementById('burndownChart').getContext('2d');
-        const burndownChart = new Chart(burndownCtx, {
+        // Trends Chart
+        const trendsCtx = document.getElementById('trendsChart').getContext('2d');
+        const trendsChart = new Chart(trendsCtx, {
             type: 'line',
             data: {
-                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                 datasets: [{
-                    label: 'Remaining Work',
-                    data: [100, 85, 70, 50, 30, 0],
-                    fill: false,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    tension: 0.1,
-                    borderWidth: 2
-                }, {
-                    label: 'Ideal Progress',
-                    data: [100, 83, 67, 50, 33, 0],
-                    fill: false,
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderDash: [5, 5],
-                    tension: 0.1,
-                    borderWidth: 1
+                    label: 'Claims Amount (₱)',
+                    data: [12000, 19000, 15000, 25000, 22000, 30000],
+                    borderColor: '#3B82F6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Remaining Hours'
+                        grid: {
+                            drawBorder: false
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return '₱' + value.toLocaleString();
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
                         }
                     }
                 }

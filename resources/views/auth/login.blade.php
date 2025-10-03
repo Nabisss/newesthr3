@@ -19,7 +19,7 @@
 
         <!-- Left Image Side -->
         <div class="w-full md:w-1/2 bg-white flex justify-center items-center p-4 md:rounded-l-lg">
-            <img class="rounded-md w-full h-60 md:h-full object-cover shadow-md" src="{{ asset('images/login.jpg') }}" alt="Logo">
+            <img class="rounded-md w-full h-60 md:h-full object-cover shadow-md" src="{{ asset('images/logocrane.jpg') }}" alt="Logo">
         </div>
 
         <!-- Right Form Side -->

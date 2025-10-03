@@ -168,33 +168,6 @@ if (isset($_SESSION['message'])) {
             display: block;
         }
 
-        /* Loading Screen Styles */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out;
-        }
-
-        .loading-logo {
-            width: 120px;
-            height: 120px;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); opacity: 0.7; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(0.95); opacity: 0.7; }
-        }
-
         /* Lesson Card Styles */
         .lesson-card {
             transition: all 0.3s ease;
@@ -282,7 +255,7 @@ if (isset($_SESSION['message'])) {
                                     </div>
                                     <div class="ml-3 flex-1">
                                         <p class="text-sm font-medium text-gray-900">Course Completion</p>
-                                        <p class="mt-1 text-sm text-gray-500">John Doe has completed the Crane Operation Basics course.</p>
+                                        <p class="mt-1 text-sm text-gray-500">John Smith has completed the Crane Operation Basics course.</p>
                                         <p class="mt-1 text-xs text-gray-400">5 hours ago</p>
                                     </div>
                                 </div>
@@ -357,14 +330,6 @@ if (isset($_SESSION['message'])) {
 </nav>
 <!-- nav bar -->
 
-<!-- Loading Screen -->
-<div id="loadingScreen" class="loading-screen">
-    <div class="text-center">
-        <img src="<?php echo asset('images/logo.png'); ?>" alt="CaliCrane Logo" class="loading-logo mx-auto mb-4">
-        <p class="text-white text-xl font-semibold">Loading Safety Training Module...</p>
-    </div>
-</div>
-
 <!-- side bar -->
 <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full sm:translate-x-0 bg-black shadow shadow-xl" aria-label="Sidebar">
     <div class="h-full px-4 pb-4 overflow-y-auto bg-black shadow">
@@ -377,7 +342,7 @@ if (isset($_SESSION['message'])) {
         <ul class="space-y-2 text-sm font-medium text-white">
             <!-- Dashboard -->
             <li>
-                <a href="http://127.0.0.1:8000/dashboard" class="flex items-center p-3 rounded-lg hover:bg-blue-900 transition">
+                <a href="https://hr2.cranecali-ms.com/dashboard" class="flex items-center p-3 rounded-lg hover:bg-blue-900 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-9 2v8m-4 4h14a2 2 0 002-2V10a2 2 0 00-2-2h-4l-2-2m-2 2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                     </svg>
@@ -413,9 +378,6 @@ if (isset($_SESSION['message'])) {
                             <ul id="learning-submenu" class="submenu pl-6">
                                 <li class="my-1">
                                     <a href="/hr2/learning/safetytraining.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition text-sm">Safety Training Module</a>
-                                </li>
-                                <li class="my-1">
-                                    <a href="/hr2/learning/maintenanceinspect.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition text-sm">Maintenance and Inspection</a>
                                 </li>
                             </ul>
                         </li>
@@ -461,7 +423,7 @@ if (isset($_SESSION['message'])) {
                         </div>
                 <ul id="succession-submenu" class="submenu pl-11">
                     <li class="my-2">
-                        <a href="../succession/successions.php" class="block p-2 rounded-lg hover:bg-blue-900 transition">Roles Development & Contingency</a>
+                        <a href="../succession/successions.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition">Roles Development & Contingency</a>
                     </li>
                 </ul>
             </li>
@@ -620,14 +582,14 @@ if (isset($_SESSION['message'])) {
                     <span class="text-sm text-gray-500"><?php echo $course['modules_count']; ?> modules</span>
 
                     <?php if ($is_enrolled): ?>
-                    <button onclick="openLesson(<?php echo $course['id']; ?>)" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                    <button onclick="openLesson(<?php echo $course['id']; ?>)" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">
                         <?php echo $button_text; ?>
                     </button>
                     <?php else: ?>
-                    <form method="POST" action="">
+                    <form method="POST" class="inline">
                         <input type="hidden" name="course_id" value="<?php echo $course['id']; ?>">
-                        <button type="submit" name="enroll_course" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
-                            Enroll
+                        <button type="submit" name="enroll_course" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">
+                            Enroll Now
                         </button>
                     </form>
                     <?php endif; ?>
@@ -635,287 +597,231 @@ if (isset($_SESSION['message'])) {
             </div>
             <?php endforeach; ?>
         </div>
-
-        <!-- Upcoming Training Section -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
-            <h2 class="text-xl font-bold text-gray-900 mb-4">Upcoming Training Sessions</h2>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left text-gray-500">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                        <tr>
-                            <th scope="col" class="px-4 py-3">Training</th>
-                            <th scope="col" class="px-4 py-3">Date</th>
-                            <th scope="col" class="px-4 py-3">Instructor</th>
-                            <th scope="col" class="px-4 py-3">Status</th>
-                            <th scope="col" class="px-4 py-3">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="bg-white border-b hover:bg-gray-50">
-                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                Crane Operation Refresher
-                            </th>
-                            <td class="px-4 py-3">Oct 15, 2023</td>
-                            <td class="px-4 py-3">John Smith</td>
-                            <td class="px-4 py-3">
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Scheduled</span>
-                            </td>
-                            <td class="px-4 py-3">
-                                <a href="#" class="font-medium text-blue-600 hover:underline">View details</a>
-                            </td>
-                        </tr>
-                        <tr class="bg-white border-b hover:bg-gray-50">
-                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                Advanced Safety Equipment
-                            </th>
-                            <td class="px-4 py-3">Oct 22, 2023</td>
-                            <td class="px-4 py-3">Maria Garcia</td>
-                            <td class="px-4 py-3">
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Scheduled</span>
-                            </td>
-                            <td class="px-4 py-3">
-                                <a href="#" class="font-medium text-blue-600 hover:underline">View details</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Resources Section -->
-        <div class="bg-white rounded-2xl shadow-lg p-6">
-            <h2 class="text-xl font-bold text-gray-900 mb-4">Training Resources</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <a href="#" class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                    <div class="p-2 mr-4 bg-blue-100 rounded-lg">
-                        <svg class="w-6 h-6 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 极速赛车开奖直播 极速赛车开奖结果 幸运飞艇开奖直播 幸运飞艇开奖结果 2z"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="font-medium text-gray-900">Safety Handbook</h3>
-                        <p class="text-sm text-gray-500">PDF - 2.4 MB</p>
-                    </div>
-                </a>
-                <a href="#" class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                    <div class="p-2 mr-4 bg-blue-100 rounded-lg">
-                        <svg class="w-6 h-6 text-blue-800" fill="none" stroke="currentColor" viewBox="0 极速赛车开奖直播 极速赛车开奖结果 幸运飞艇开奖直播 幸运飞艇开奖结果 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 极速赛车开奖直播 极速赛车开奖结果 幸运飞艇开奖直播 幸运飞艇开奖结果 002-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="font-medium text极速赛车开奖直播 极速赛车开奖结果 幸运飞艇开奖直播 幸运飞艇开奖结果 -900">Training Videos</h3>
-                        <p class="text-sm text-gray-500">12 videos</p>
-                    </div>
-                </a>
-                <a href="#" class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                    <div class="p-2 mr-4 bg-blue-100 rounded-lg">
-                        <svg class="w-6 h-6 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2极速赛车开奖直播 极速赛车开奖结果 幸运飞艇开奖直播 幸运飞艇开奖结果 6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2极速赛车开奖直播 极速赛车开奖结果 幸运飞艇开奖直播 幸运飞艇开奖结果 h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="font-medium text-gray-900">Checklists</h3>
-                        <p class="text-sm text-gray-500">Printable forms</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-
     </div>
 </div>
 <!-- content -->
 
-<!-- Lesson Content Modal -->
-<div id="lessonModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
-    <div class="bg-white rounded-2xl w-11/12 md极速赛车开奖直播 极速赛车开奖结果 幸运飞艇开奖直播 幸运飞艇开奖结果 -w-3/4 lg:w-2/3 max-h-screen overflow-y-auto">
-        <div class="p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900">Lesson Content</h2>
-                <button onclick="closeLesson()" class="text-gray-400 hover:text-gray-600">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
+<!-- Lesson Modal -->
+<div id="lessonModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-2xl shadow-2xl w-11/12 max-w-4xl max-h-[90vh] overflow-hidden">
+        <!-- Modal Header -->
+        <div class="bg-blue-600 text-white p-6">
+            <div class="flex justify-between items-center">
+                <h3 id="modalTitle" class="text-2xl font-bold">Lesson Title</h3>
+                <button onclick="closeLesson()" class="text-white hover:text-gray-200 text-2xl">
+                    &times;
                 </button>
             </div>
-            <div id="modalContent" class="text-gray-700">
+            <div class="flex items-center mt-2 text-blue-100">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span id="modalDuration">Duration: 30 minutes</span>
+            </div>
+        </div>
+
+        <!-- Modal Content -->
+        <div class="p-6 overflow-y-auto max-h-[60vh]">
+            <div id="modalContent" class="prose max-w-none">
                 <!-- Content will be loaded here -->
             </div>
-            <div class="mt-8 flex justify-between">
-                <button onclick="closeLesson()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">
-                    Close
-                </button>
-                <button onclick="markLessonComplete()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                    Mark as Complete
-                </button>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="bg-gray-50 px-6 py-4 border-t">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center text-gray-600">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span id="modalModules">3 modules</span>
+                </div>
+                <div class="flex space-x-3">
+                    <button onclick="previousModule()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg font-semibold transition hidden" id="prevBtn">
+                        Previous
+                    </button>
+                    <button onclick="nextModule()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition" id="nextBtn">
+                        Next Module
+                    </button>
+                    <button onclick="completeLesson()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition hidden" id="completeBtn">
+                        Complete Lesson
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 <script>
-    // Toggle submenu function
-    function toggleSubmenu(id) {
-        const submenu = document.getElementById(id);
-        const arrow = document.getElementById(id.replace('submenu', 'arrow'));
-
-        submenu.classList.toggle('open');
-        arrow.classList.toggle('rotate-0');
-        arrow.classList.toggle('rotate-90');
-    }
-
-    // Toggle notification dropdown
-    function toggleNotification() {
-        const dropdown = document.getElementById('notification-dropdown');
-        dropdown.classList.toggle('open');
-    }
-
-    // Close notification dropdown when clicking outside
-    document.addEventListener('click', function(event) {
-        const dropdown = document.getElementById('notification-dropdown');
-        const notifButton = document.querySelector('button[onclick="toggleNotification()"]');
-
-        if (!notifButton.contains(event.target) && !dropdown.contains(event.target)) {
-            dropdown.classList.remove('open');
-        }
-    });
-
     // Philippine Time Display
     function updatePhilippineTime() {
         const options = {
             timeZone: 'Asia/Manila',
             hour12: true,
-            hour: 'numeric',
-            minute: 'numeric',
-            second: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
             month: 'short',
             day: 'numeric',
             year: 'numeric'
         };
-
         const formatter = new Intl.DateTimeFormat('en-PH', options);
-        const phTime = formatter.format(new Date());
-
-        document.getElementById('philippineTime').textContent = phTime;
+        const philippineTime = formatter.format(new Date());
+        document.getElementById('philippineTime').textContent = philippineTime;
     }
 
-    setInterval(updatePhilippineTime, 1000);
+    // Update time immediately and then every second
     updatePhilippineTime();
+    setInterval(updatePhilippineTime, 1000);
 
-    // Loading Screen Simulation
-    document.addEventListener('DOMContentLoaded', function() {
-        // Show loading screen initially
-        const loadingScreen = document.getElementById('loadingScreen');
+    // Submenu toggle function
+    function toggleSubmenu(id) {
+        const submenu = document.getElementById(id);
+        const arrow = document.getElementById(id.replace('-submenu', '-arrow'));
 
-        // Simulate loading process
-        setTimeout(function() {
-            loadingScreen.style.opacity = '0';
-            setTimeout(function() {
-                loadingScreen.style.display = 'none';
-            }, 500);
-        }, 1500); // Show loading screen for 1.5 seconds
+        if (submenu.classList.contains('open')) {
+            submenu.classList.remove('open');
+            arrow.classList.remove('rotate-90');
+            arrow.classList.add('rotate-0');
+        } else {
+            submenu.classList.add('open');
+            arrow.classList.remove('rotate-0');
+            arrow.classList.add('rotate-90');
+        }
+    }
+
+    // Notification toggle function
+    function toggleNotification() {
+        const notification = document.getElementById('notification-dropdown');
+        notification.classList.toggle('open');
+    }
+
+    // Close notification when clicking outside
+    document.addEventListener('click', function(event) {
+        const notification = document.getElementById('notification-dropdown');
+        const notificationBtn = event.target.closest('button[onclick="toggleNotification()"]');
+
+        if (!notificationBtn && !notification.contains(event.target)) {
+            notification.classList.remove('open');
+        }
     });
 
-    // Open lesson modal
+    // Lesson Modal Functions
+    let currentCourseId = null;
+    let currentModuleIndex = 0;
+    let courseModules = [];
+
     function openLesson(courseId) {
-        console.log("Opening lesson for course:", courseId);
+        currentCourseId = courseId;
+        currentModuleIndex = 0;
 
-        const modal = document.getElementById('lessonModal');
-        const title = document.getElementById('modalTitle');
-        const content = document.getElementById('modalContent');
+        // Fetch course details and modules
+        fetch(`/api/courses/${courseId}`)
+            .then(response => response.json())
+            .then(course => {
+                document.getElementById('modalTitle').textContent = course.title;
+                document.getElementById('modalDuration').textContent = `Duration: ${course.duration}`;
+                document.getElementById('modalModules').textContent = `${course.modules_count} modules`;
 
-        title.textContent = "Loading Lesson...";
-        content.innerHTML = "<div class='text-center py-8'><div class='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-极速赛车开奖直播 极速赛车开奖结果 幸运飞艇开奖直播 幸运飞艇开奖结果 00 mx-auto'></div><p class='mt-4'>Loading content...</p></div>";
-        modal.classList.remove('hidden');
-
-        // Fetch lesson content from server
-        fetch(`lesson_content.php?course_id=${courseId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Server error: ${response.status}`);
-                }
-                return response.json();
+                // Load modules
+                return fetch(`/api/courses/${courseId}/modules`);
             })
-            .then(data => {
-                if (data.error) {
-                    title.textContent = "Error";
-                    content.innerHTML = `<div class="p-4 bg-red-100 text-red-700 rounded-lg">
-                        <p>${data.error}</p>
-                        <button onclick="closeLesson()" class="mt-2 px-3 py-1 bg-red-600 text-white rounded">Close</button>
-                    </div>`;
-                } else {
-                    title.textContent = data.title;
-                    content.innerHTML = data.content;
-                    content.setAttribute('data-course-id', courseId);
-                }
+            .then(response => response.json())
+            .then(modules => {
+                courseModules = modules;
+                loadCurrentModule();
+                document.getElementById('lessonModal').classList.remove('hidden');
+                updateNavigationButtons();
             })
             .catch(error => {
-                console.error('Fetch Error:', error);
-                title.textContent = "Error";
-                content.innerHTML = `
-                    <div class="p-4 bg-red-100 text-red-700 rounded-lg">
-                        <p>Error loading content. Please try again.</p>
-                        <p class="text-sm mt-2">Error details: ${error.message}</p>
-                        <button onclick="closeLesson()极速赛车开奖直播 极速赛车开奖结果 幸运飞艇开奖直播 幸运飞艇开奖结果 " class="mt-2 px极速赛车开奖直播 极速赛车开奖结果 幸运飞艇开奖直播 幸运飞艇开奖结果 -3 py-1 bg-red-600 text-white rounded">Close</button>
-                    </div>
+                console.error('Error loading course:', error);
+                // Fallback content for demo purposes
+                document.getElementById('modalTitle').textContent = 'Course ' + courseId;
+                document.getElementById('modalDuration').textContent = 'Duration: 30 minutes';
+                document.getElementById('modalModules').textContent = '3 modules';
+                document.getElementById('modalContent').innerHTML = `
+                    <h3>Course Content</h3>
+                    <p>This is the course content for course ${courseId}.</p>
+                    <p>In a real application, this would be loaded from the database.</p>
                 `;
+                document.getElementById('lessonModal').classList.remove('hidden');
             });
     }
 
-    // Close lesson modal
     function closeLesson() {
-        const modal = document.getElementById('lessonModal');
-        modal.classList.add('hidden');
+        document.getElementById('lessonModal').classList.add('hidden');
+        currentCourseId = null;
+        currentModuleIndex = 0;
+        courseModules = [];
     }
 
-    // Mark lesson as complete
-    function markLessonComplete() {
-        const lessonId = document.getElementById('modalContent').getAttribute('data-lesson-id');
-        const courseId = document.getElementById('modalContent').getAttribute('data-course-id');
-
-        if (!lessonId) {
-            alert('No lesson loaded');
-            return;
+    function loadCurrentModule() {
+        if (courseModules.length > 0 && currentModuleIndex < courseModules.length) {
+            const module = courseModules[currentModuleIndex];
+            document.getElementById('modalContent').innerHTML = `
+                <h3>${module.title}</h3>
+                <p>${module.content}</p>
+            `;
         }
-
-        const completeBtn = document.querySelector('#lessonModal button:last-child');
-        const originalText = completeBtn.textContent;
-        completeBtn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>';
-        completeBtn.disabled = true;
-
-        // Create form data
-        const formData = new FormData();
-        formData.append('mark_complete', '1');
-        formData.append('lesson_id', lessonId);
-
-        fetch('lesson_content.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Lesson marked as complete!');
-                closeLesson();
-
-                // Refresh the page to update progress
-                setTimeout(() => {
-                    location.reload();
-                }, 500);
-            } else {
-                alert('Error: ' + (data.error || 'Unknown error'));
-                completeBtn.textContent = originalText;
-                completeBtn.disabled = false;
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error marking lesson as complete. Please try again.');
-            completeBtn.textContent = originalText;
-            completeBtn.disabled = false;
-        });
     }
-</script>
 
+    function previousModule() {
+        if (currentModuleIndex > 0) {
+            currentModuleIndex--;
+            loadCurrentModule();
+            updateNavigationButtons();
+        }
+    }
+
+    function nextModule() {
+        if (currentModuleIndex < courseModules.length - 1) {
+            currentModuleIndex++;
+            loadCurrentModule();
+            updateNavigationButtons();
+        }
+    }
+
+    function updateNavigationButtons() {
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const completeBtn = document.getElementById('completeBtn');
+
+        prevBtn.classList.toggle('hidden', currentModuleIndex === 0);
+        nextBtn.classList.toggle('hidden', currentModuleIndex === courseModules.length - 1);
+        completeBtn.classList.toggle('hidden', currentModuleIndex !== courseModules.length - 1);
+    }
+
+    function completeLesson() {
+        if (currentCourseId) {
+            // Mark course as completed
+            fetch(`/api/courses/${currentCourseId}/complete`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    closeLesson();
+                    location.reload(); // Refresh to update progress
+                }
+            })
+            .catch(error => {
+                console.error('Error completing course:', error);
+                closeLesson();
+                location.reload();
+            });
+        }
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('lessonModal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeLesson();
+        }
+    });
+</script>
 </body>
 </html>

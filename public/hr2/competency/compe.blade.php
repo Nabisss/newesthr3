@@ -40,46 +40,6 @@
             display: block;
         }
 
-        /* Loading screen styles */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out;
-        }
-
-        .crane-loader {
-            width: 120px;
-            height: 120px;
-            position: relative;
-            animation: crane-lift 2s infinite ease-in-out;
-        }
-
-        .crane-loader img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        @keyframes crane-lift {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .loading-text {
-            color: white;
-            margin-top: 20px;
-            font-size: 1.2rem;
-            text-align: center;
-        }
-
         /* Competency Management Styles */
         .profile-card {
             transition: all 0.3s ease;
@@ -168,19 +128,34 @@
             color: #b91c1c;
             border: 1px solid #fecaca;
         }
+
+        /* New styles for competency management */
+        .assessment-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid #3b82f6;
+        }
+        .gap-item {
+            border-left: 4px solid #ef4444;
+        }
+        .training-item {
+            border-left: 4px solid #10b981;
+        }
+
+        /* Employee list modal styles */
+        .employee-modal {
+            max-width: 900px;
+            width: 90%;
+        }
+        .employee-card {
+            transition: all 0.3s ease;
+        }
+        .employee-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
-
-   <!-- Loading Screen -->
-   <div id="loading-screen">
-        <div class="flex flex-col items-center">
-            <div class="crane-loader">
-                <img src="images/logo.png" alt="CaliCrane Logo">
-            </div>
-            <p class="loading-text">Loading Competency Management...</p>
-        </div>
-    </div>
 
    <!-- nav bar -->
 <nav class="fixed bg-[#111111] top-0 z-50 w-full shadow">
@@ -194,7 +169,7 @@
                     </svg>
                 </button>
                 <a href="#" class="flex items-center ms-2 md:me-24">
-                    <img src="images/logo.png" class="h-8 me-2" alt="Logo">
+                    <img src="https://hr2.cranecali-ms.com/images/logo.png" class="h-8 me-2" alt="Logo">
                     <span class="self-center text-xl font-extrabold sm:text-2xl whitespace-nowrap text-white">CaliCrane</span>
                 </a>
             </div>
@@ -245,7 +220,7 @@
                                     </div>
                                     <div class="ml-3 flex-1">
                                         <p class="text-sm font-medium text-gray-900">Course Completion</p>
-                                        <p class="mt-1 text-sm text-gray-500">John Doe has completed the Crane Operation Basics course.</p>
+                                        <p class="mt-1 text-sm text-gray-500">John Smith has completed the Crane Operation Basics course.</p>
                                         <p class="mt-1 text-xs text-gray-400">5 hours ago</p>
                                     </div>
                                 </div>
@@ -290,7 +265,7 @@
                         <!-- User Info -->
                         <div class="px-4 py-3 text-center" role="none">
                             <p class="text-sm font-semibold text-gray-900">
-                                John Doe
+                                John Smith
                             </p>
                             <p class="text-sm font-medium text-gray-500 truncate">
                                 john.doe@calicrane.com
@@ -338,7 +313,7 @@
         <ul class="space-y-2 text-sm font-medium text-white">
             <!-- Dashboard -->
             <li>
-                <a href="http://127.0.0.1:8000/dashboard" class="flex items-center p-3 rounded-lg hover:bg-blue-900 transition">
+                <a href="https://hr2.cranecali-ms.com/dashboard" class="flex items-center p-3 rounded-lg hover:bg-blue-900 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-9 2v8m-4 4h14a2 2 0 002-2V10a2 2 0 00-2-2h-4l-2-2m-2 2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                     </svg>
@@ -374,9 +349,6 @@
                             <ul id="learning-submenu" class="submenu pl-6">
                                 <li class="my-1">
                                     <a href="../learning/safetytraining.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition text-sm">Safety Training Module</a>
-                                </li>
-                                <li class="my-1">
-                                    <a href="../learning/maintenanceinspect.blade.php" class="block p-2 rounded-lg hover:bg-blue-900 transition text-sm">Maintenance and Inspection</a>
                                 </li>
                             </ul>
                         </li>
@@ -470,7 +442,7 @@
                     <svg class="w-3 h-3 text-gray-900 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                     </svg>
-                    <a href="http://127.0.0.1:8000/dashboard" class="ml-1 text-sm font-medium text-black text-gray-900 hover:text-blue-900 md:ml-2">Dashboard</a>
+                    <a href="https://hr2.cranecali-ms.com/dashboard" class="ml-1 text-sm font-medium text-black text-gray-900 hover:text-blue-900 md:ml-2">Dashboard</a>
                 </div>
                 </li>
                 <li aria-current="page">
@@ -502,7 +474,7 @@
                         <img class="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100"
                             src="images/uploadprof.png"
                             alt="Profile Photo">
-                        <h2 class="text-xl font-bold text-gray-900">John Doe</h2>
+                        <h2 class="text-xl font-bold text-gray-900">John Smith</h2>
                         <p class="text-gray-600">Crane Operator</p>
                         <div class="mt-2 flex items-center">
                             <span class="status-badge status-active">Active</span>
@@ -548,6 +520,9 @@
                             <li class="me-2">
                                 <button type="button" id="training-tab" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300" onclick="switchTab('training')">Training Certification</button>
                             </li>
+                            <li class="me-2">
+                                <button type="button" id="management-tab" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-blue-600 hover:border-blue-300" onclick="switchTab('management')">Competency Management</button>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -557,8 +532,11 @@
                     <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="text-lg font-semibold text-gray-900">License & Certification Validity</h3>
-                            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5" onclick="openUploadModal()">
-                                Upload Proof
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center" onclick="openEmployeeListModal()">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                </svg>
+                                View Employee List
                             </button>
                         </div>
 
@@ -570,7 +548,6 @@
                                         <th scope="col" class="px-4 py-3">Issued Date</th>
                                         <th scope="col" class="px-4 py-3">Expiry Date</th>
                                         <th scope="col" class="px-4 py-3">Status</th>
-                                        <th scope="col" class="px-4 py-3">Reminder</th>
                                     </tr>
                                 </thead>
                                 <tbody id="certifications-table-body">
@@ -595,7 +572,15 @@
 
                 <div id="evaluation-content" class="tab-content">
                     <div class="bg-white rounded-2xl shadow-lg p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-6">Competency Evaluation</h3>
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900">Competency Evaluation</h3>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center" onclick="openEmployeeListModal()">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                </svg>
+                                View Employee List
+                            </button>
+                        </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <h4 class="text-md font-semibold text-gray-900 mb-3">Technical Skills</h4>
@@ -611,20 +596,20 @@
                                     </div>
                                     <div>
                                         <div class="flex justify-between mb-1">
-                                            <span class="text-sm font-medium text-gray-700">Safety Procedures</span>
-                                            <span class="text-sm font-medium text-gray-700">92%</span>
+                                            <span class="text-sm font-medium text-gray-700">Equipment Maintenance</span>
+                                            <span class="text-sm font-medium text-gray-700">70%</span>
                                         </div>
                                         <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                            <div class="bg-green-600 h-2.5 rounded-full" style="width: 92%"></div>
+                                            <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 70%"></div>
                                         </div>
                                     </div>
                                     <div>
                                         <div class="flex justify-between mb-1">
-                                            <span class="text-sm font-medium text-gray-700">Equipment Maintenance</span>
-                                            <span class="text-sm font-medium text-gray-700">78%</span>
+                                            <span class="text-sm font-medium text-gray-700">Safety Procedures</span>
+                                            <span class="text-sm font-medium text-gray-700">60%</span>
                                         </div>
                                         <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                            <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 78%"></div>
+                                            <div class="bg-red-500 h-2.5 rounded-full" style="width: 60%"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -635,10 +620,10 @@
                                     <div>
                                         <div class="flex justify-between mb-1">
                                             <span class="text-sm font-medium text-gray-700">Communication</span>
-                                            <span class="text-sm font-medium text-gray-700">88%</span>
+                                            <span class="text-sm font-medium text-gray-700">75%</span>
                                         </div>
                                         <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                            <div class="bg-green-600 h-2.5 rounded-full" style="width: 88%"></div>
+                                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 75%"></div>
                                         </div>
                                     </div>
                                     <div>
@@ -653,22 +638,13 @@
                                     <div>
                                         <div class="flex justify-between mb-1">
                                             <span class="text-sm font-medium text-gray-700">Problem Solving</span>
-                                            <span class="text-sm font-medium text-gray-700">82%</span>
+                                            <span class="text-sm font-medium text-gray-700">80%</span>
                                         </div>
                                         <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                            <div class="bg-green-600 h-2.5 rounded-full" style="width: 82%"></div>
+                                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="mt-6">
-                            <h4 class="text-md font-semibold text-gray-900 mb-3">Latest Evaluation</h4>
-                            <div class="bg-gray-50 p-4 rounded-lg">
-                                <p class="text-gray-700"><span class="font-semibold">Date:</span> October 15, 2023</p>
-                                <p class="text-gray-700"><span class="font-semibold">Evaluator:</span> Maria Santos</p>
-                                <p class="text-gray-700"><span class="font-semibold">Overall Rating:</span> 4.2/5</p>
-                                <p class="text-gray-700 mt-2"><span class="font-semibold">Comments:</span> John demonstrates excellent crane operation skills and follows safety protocols diligently. Continued improvement in equipment maintenance knowledge is recommended.</p>
                             </div>
                         </div>
                     </div>
@@ -676,50 +652,54 @@
 
                 <div id="training-content" class="tab-content">
                     <div class="bg-white rounded-2xl shadow-lg p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-6">Training Certifications</h3>
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900">Training Certification</h3>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center" onclick="openEmployeeListModal()">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                </svg>
+                                View Employee List
+                            </button>
+                        </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-sm text-left text-gray-500">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                     <tr>
-                                        <th scope="col" class="px-4 py-3">Training Program</th>
-                                        <th scope="col" class="px-4 py-3">Completion Date</th>
-                                        <th scope="col" class="px-4 py-3">Validity Period</th>
+                                        <th scope="col" class="px-4 py-3">Training Name</th>
+                                        <th scope="col" class="px-4 py-3">Date Completed</th>
                                         <th scope="col" class="px-4 py-3">Status</th>
                                         <th scope="col" class="px-4 py-3">Certificate</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="bg-white border-b">
-                                        <td class="px-4 py-4 font-medium text-gray-900">Advanced Crane Safety</td>
+                                    <tr class="bg-white border-b hover:bg-gray-50">
+                                        <td class="px-4 py-4 font-medium text-gray-900">Basic Crane Operation</td>
                                         <td class="px-4 py-4">March 15, 2023</td>
-                                        <td class="px-4 py-4">2 years</td>
                                         <td class="px-4 py-4">
-                                            <span class="status-badge status-valid">Valid</span>
+                                            <span class="status-badge status-valid">Completed</span>
                                         </td>
                                         <td class="px-4 py-4">
-                                            <button type="button" class="text-blue-600 hover:text-blue-900 font-medium">Download</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="bg-white border-b">
-                                        <td class="px-4 py-4 font-medium text-gray-900">Heavy Equipment Operation</td>
-                                        <td class="px-4 py-4">January 20, 2023</td>
-                                        <td class="px-4 py-4">3 years</td>
-                                        <td class="px-4 py-4">
-                                            <span class="status-badge status-valid">Valid</span>
-                                        </td>
-                                        <td class="px-4 py-4">
-                                            <button type="button" class="text-blue-600 hover:text-blue-900 font-medium">Download</button>
+                                            <button class="text-blue-600 hover:text-blue-800 font-medium">Download</button>
                                         </td>
                                     </tr>
-                                    <tr class="bg-white border-b">
-                                        <td class="px-4 py-4 font-medium text-gray-900">Emergency Response Training</td>
-                                        <td class="px-4 py-4">June 10, 2022</td>
-                                        <td class="px-4 py-4">1 year</td>
+                                    <tr class="bg-white border-b hover:bg-gray-50">
+                                        <td class="px-4 py-4 font-medium text-gray-900">Advanced Safety Training</td>
+                                        <td class="px-4 py-4">June 22, 2023</td>
                                         <td class="px-4 py-4">
-                                            <span class="status-badge status-expired">Expired</span>
+                                            <span class="status-badge status-valid">Completed</span>
                                         </td>
                                         <td class="px-4 py-4">
-                                            <button type="button" class="text-blue-600 hover:text-blue-900 font-medium">Download</button>
+                                            <button class="text-blue-600 hover:text-blue-800 font-medium">Download</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white border-b hover:bg-gray-50">
+                                        <td class="px-4 py-4 font-medium text-gray-900">Emergency Response</td>
+                                        <td class="px-4 py-4">-</td>
+                                        <td class="px-4 py-4">
+                                            <span class="status-badge status-pending">Pending</span>
+                                        </td>
+                                        <td class="px-4 py-4">
+                                            <button class="text-gray-400 font-medium" disabled>Not Available</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -727,56 +707,261 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- NEW: Competency Management Tab Content -->
+                <div id="management-content" class="tab-content">
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900">Competency Management</h3>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center" onclick="openEmployeeListModal()">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                </svg>
+                                View Employee List
+                            </button>
+                        </div>
+
+                        <!-- Employee Profiles Section -->
+                        <div class="mb-8">
+                            <h4 class="text-md font-semibold text-gray-900 mb-4">Employee Profiles</h4>
+                            <p class="text-sm text-gray-600 mb-4">A list of employee profiles will be maintained. This will eventually be integrated with the Core Human Resources System once full system integration is implemented. Each profile will include employee details such as name, position, department, and relevant background information.</p>
+
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm text-left text-gray-500">
+                                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-4 py-3">Employee Name</th>
+                                            <th scope="col" class="px-4 py-3">Position</th>
+                                            <th scope="col" class="px-4 py-3">Department</th>
+                                            <th scope="col" class="px-4 py-3">Experience</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="bg-white border-b hover:bg-gray-50">
+                                            <td class="px-4 py-4 font-medium text-gray-900">John Smith</td>
+                                            <td class="px-4 py-4">Crane Operator</td>
+                                            <td class="px-4 py-4">Operations</td>
+                                            <td class="px-4 py-4">3 years</td>
+                                        </tr>
+                                        <tr class="bg-white border-b hover:bg-gray-50">
+                                            <td class="px-4 py-4 font-medium text-gray-900">Jane Smith</td>
+                                            <td class="px-4 py-4">Safety Officer</td>
+                                            <td class="px-4 py-4">Safety</td>
+                                            <td class="px-4 py-4">5 years</td>
+                                        </tr>
+                                        <tr class="bg-white border-b hover:bg-gray-50">
+                                            <td class="px-4 py-4 font-medium text-gray-900">Robert Johnson</td>
+                                            <td class="px-4 py-4">Maintenance Lead</td>
+                                            <td class="px-4 py-4">Maintenance</td>
+                                            <td class="px-4 py-4">7 years</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Skill Assessment Section -->
+                        <div class="mb-8">
+                            <h4 class="text-md font-semibold text-gray-900 mb-4">Skill Assessment</h4>
+                            <p class="text-sm text-gray-600 mb-4">Skill assessments will be conducted to evaluate the knowledge, skills, and performance levels of employees. This can be done through different methods:</p>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                                <div class="bg-blue-50 p-4 rounded-lg assessment-card">
+                                    <h5 class="font-semibold text-blue-800 mb-2">Written or Practical Examination</h5>
+                                    <p class="text-sm text-gray-700">Employees undergo written tests or hands-on practical exams to measure their technical knowledge and job-related skills.</p>
+                                    <p class="text-xs text-gray-600 mt-2">Example: Safety training exams, technical knowledge tests, or machine operation demonstrations.</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg assessment-card">
+                                    <h5 class="font-semibold text-green-800 mb-2">Self-Assessment</h5>
+                                    <p class="text-sm text-gray-700">Employees rate their own skill levels and competencies based on a structured evaluation form.</p>
+                                    <p class="text-xs text-gray-600 mt-2">This encourages self-reflection and provides insight into how employees perceive their own capabilities.</p>
+                                </div>
+                                <div class="bg-purple-50 p-4 rounded-lg assessment-card">
+                                    <h5 class="font-semibold text-purple-800 mb-2">Work Evaluation (Manager Observation)</h5>
+                                    <p class="text-sm text-gray-700">Managers and supervisors directly observe employees during their daily tasks.</p>
+                                    <p class="text-xs text-gray-600 mt-2">Performance, work habits, and skill application are recorded and evaluated.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Competency Gaps Section -->
+                        <div class="mb-8">
+                            <h4 class="text-md font-semibold text-gray-900 mb-4">Competency Gaps</h4>
+                            <p class="text-sm text-gray-600 mb-4">A Competency Gap List will be created to identify the required skills that employees may currently lack. These gaps will highlight the difference between the employee's existing skills and the skills required for their role or future career progression.</p>
+
+                            <div class="bg-red-50 p-4 rounded-lg">
+                                <h5 class="font-semibold text-red-800 mb-2">Example:</h5>
+                                <p class="text-sm text-gray-700">An operator may have strong practical skills but lack knowledge in safety compliance or customer service.</p>
+                            </div>
+
+                            <div class="mt-4">
+                                <h5 class="font-semibold text-gray-800 mb-2">Identified Gaps for John Smith:</h5>
+                                <ul class="list-disc pl-5 text-sm text-gray-700 space-y-2">
+                                    <li class="gap-item pl-2">Safety compliance knowledge (40% proficiency)</li>
+                                    <li class="gap-item pl-2">Advanced equipment troubleshooting (55% proficiency)</li>
+                                    <li class="gap-item pl-2">Emergency response procedures (60% proficiency)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Assign Training Section -->
+                        <div>
+                            <h4 class="text-md font-semibold text-gray-900 mb-4">Assign Training (Connected to Training Management System)</h4>
+                            <p class="text-sm text-gray-600 mb-4">Based on the results of Skill Assessments and identified Competency Gaps, employees will be matched with the appropriate training programs. The Training Management System will recommend and assign training modules that directly address the skills employees need to improve.</p>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                <div class="bg-green-50 p-4 rounded-lg training-item">
+                                    <h5 class="font-semibold text-green-800 mb-2">Example 1:</h5>
+                                    <p class="text-sm text-gray-700">If an employee shows weakness in safety procedures, they will be assigned a Safety Training Course.</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg training-item">
+                                    <h5 class="font-semibold text-green-800 mb-2">Example 2:</h5>
+                                    <p class="text-sm text-gray-700">If an employee lacks communication skills, they will be assigned Customer Service Training.</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-green-100 p-4 rounded-lg">
+                                <p class="text-sm text-green-800 font-medium">This ensures that training is targeted, efficient, and aligned with both employee development and organizational needs.</p>
+                            </div>
+
+                            <div class="mt-6">
+                                <h5 class="font-semibold text-gray-800 mb-3">Recommended Training for John Smith:</h5>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg">
+                                        <div>
+                                            <h6 class="font-medium text-gray-900">Advanced Safety Compliance Course</h6>
+                                            <p class="text-sm text-gray-600">Addresses safety compliance knowledge gap</p>
+                                        </div>
+                                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700">Assign</button>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg">
+                                        <div>
+                                            <h6 class="font-medium text-gray-900">Equipment Troubleshooting Workshop</h6>
+                                            <p class="text-sm text-gray-600">Improves advanced equipment troubleshooting skills</p>
+                                        </div>
+                                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700">Assign</button>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg">
+                                        <div>
+                                            <h6 class="font-medium text-gray-900">Emergency Response Training</h6>
+                                            <p class="text-sm text-gray-600">Enhances emergency response procedure knowledge</p>
+                                        </div>
+                                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700">Assign</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<!-- content -->
 
-<!-- Upload Modal -->
-<div id="upload-modal" class="modal">
-    <div class="modal-content">
+<!-- Employee List Modal -->
+<div id="employee-list-modal" class="modal">
+    <div class="modal-content employee-modal">
         <div class="flex justify-between items-center mb-4">
-            <h3 class="text-lg font-semibold text-gray-900">Upload Certification Proof</h3>
-            <button type="button" class="text-gray-400 hover:text-gray-600" onclick="closeUploadModal()">
+            <h3 class="text-lg font-semibold text-gray-900">Employee List</h3>
+            <button onclick="closeEmployeeListModal()" class="text-gray-400 hover:text-gray-500">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
         </div>
-        <form id="upload-form">
-            <div class="mb-4">
-                <label for="certification-type" class="block text-sm font-medium text-gray-700 mb-2">Certification Type</label>
-                <select id="certification-type" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">Select Certification Type</option>
-                    <option value="Crane Operator License">Crane Operator License</option>
-                    <option value="Safety Certification">Safety Certification</option>
-                    <option value="First Aid Certification">First Aid Certification</option>
-                    <option value="Other">Other</option>
-                </select>
+
+        <div class="mb-4">
+            <div class="relative">
+                <input type="text" id="employee-search" placeholder="Search employees..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <svg class="w-5 h-5 absolute right-3 top-2.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
             </div>
-            <div class="mb-4">
-                <label for="issued-date" class="block text-sm font-medium text-gray-700 mb-2">Issued Date</label>
-                <input type="date" id="issued-date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div class="mb-4">
-                <label for="expiry-date" class="block text-sm font-medium text-gray-700 mb-2">Expiry Date</label>
-                <input type="date" id="expiry-date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div class="mb-4">
-                <label for="modal-file-input" class="block text-sm font-medium text-gray-700 mb-2">Upload File</label>
-                <div class="upload-area" onclick="document.getElementById('modal-file-input').click()">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                    <p class="text-gray-600 text-sm">Click to upload or drag and drop</p>
-                    <p class="text-xs text-gray-500 mt-1">PNG, JPG, PDF up to 10MB</p>
-                    <input type="file" id="modal-file-input" class="hidden" accept=".png,.jpg,.jpeg,.pdf">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-96 overflow-y-auto p-2">
+            <!-- Employee Cards -->
+            <div class="bg-white border border-gray-200 rounded-lg p-4 employee-card">
+                <div class="flex items-center mb-3">
+                    <img class="w-12 h-12 rounded-full object-cover mr-3" src="images/uploadprof.png" alt="John Smith">
+                    <div>
+                        <h4 class="font-semibold text-gray-900">John Smith</h4>
+                        <p class="text-sm text-gray-600">Crane Operator</p>
+                    </div>
                 </div>
-                <p id="file-name" class="text-sm text-gray-600 mt-2"></p>
+                <div class="text-sm text-gray-700">
+                    <p><span class="font-medium">Department:</span> Operations</p>
+                    <p><span class="font-medium">Experience:</span> 3 years</p>
+                    <p><span class="font-medium">Status:</span> <span class="text-green-600">Active</span></p>
+                </div>
+                <button class="w-full mt-3 bg-blue-100 text-blue-700 py-2 rounded-lg text-sm font-medium hover:bg-blue-200 transition" onclick="selectEmployee('Jane Smith')">Select Employee</button>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-lg p-4 employee-card">
+                <div class="flex items-center mb-3">
+                    <img class="w-12 h-12 rounded-full object-cover mr-3" src="images/uploadprof.png" alt="Robert Johnson">
+                    <div>
+                        <h4 class="font-semibold text-gray-900">Robert Johnson</h4>
+                        <p class="text-sm text-gray-600">Maintenance Technician</p>
+                    </div>
+                </div>
+                <div class="text-sm text-gray-700">
+                    <p><span class="font-medium">Department:</span> Maintenance</p>
+                    <p><span class="font-medium">Experience:</span> 7 years</p>
+                    <p><span class="font-medium">Status:</span> <span class="text-green-600">Active</span></p>
+                </div>
+                <button class="w-full mt-3 bg-blue-100 text-blue-700 py-2 rounded-lg text-sm font-medium hover:bg-blue-200 transition" onclick="selectEmployee('Robert Johnson')">Select Employee</button>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-lg p-4 employee-card">
+                <div class="flex items-center mb-3">
+                    <img class="w-12 h-12 rounded-full object-cover mr-3" src="images/uploadprof.png" alt="Maria Garcia">
+                    <div>
+                        <h4 class="font-semibold text-gray-900">Maria Garcia</h4>
+                        <p class="text-sm text-gray-600">Customer Service Visor</p>
+                    </div>
+                </div>
+                <div class="text-sm text-gray-700">
+                    <p><span class="font-medium">Department:</span> CS Dept</p>
+                    <p><span class="font-medium">Experience:</span> 10 years</p>
+                    <p><span class="font-medium">Status:</span> <span class="text-green-600">Active</span></p>
+                </div>
+                <button class="w-full mt-3 bg-blue-100 text-blue-700 py-2 rounded-lg text-sm font-medium hover:bg-blue-200 transition" onclick="selectEmployee('Sarah Brown')">Select Employee</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Certification Modal -->
+<div id="certification-modal" class="modal">
+    <div class="modal-content">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Add New Certification</h3>
+            <button onclick="closeModal()" class="text-gray-400 hover:text-gray-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <form id="certification-form">
+            <div class="mb-4">
+                <label for="certification-name" class="block text-sm font-medium text-gray-700 mb-1">Certification Name</label>
+                <input type="text" id="certification-name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="issued-date" class="block text-sm font-medium text-gray-700 mb-1">Issued Date</label>
+                    <input type="date" id="issued-date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div>
+                    <label for="expiry-date" class="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
+                    <input type="date" id="expiry-date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
             </div>
             <div class="flex justify-end space-x-3">
-                <button type="button" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300" onclick="closeUploadModal()">Cancel</button>
-                <button type="button" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700" onclick="submitCertification()">Upload</button>
+                <button type="button" onclick="closeModal()" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">Cancel</button>
+                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">Save</button>
             </div>
         </form>
     </div>
@@ -784,56 +969,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 <script>
-    // Hide loading screen after page loads
-    window.addEventListener('load', function() {
-        setTimeout(function() {
-            document.getElementById('loading-screen').style.opacity = '0';
-            setTimeout(function() {
-                document.getElementById('loading-screen').style.display = 'none';
-            }, 500);
-        }, 1000);
-    });
-
-    // Initialize data
-    let certifications = [
-        {
-            id: 1,
-            name: "Crane Operator License",
-            issuedDate: "2023-03-15",
-            expiryDate: "2025-03-15",
-            status: "Valid",
-            reminder: "2 months before expiry"
-        },
-        {
-            id: 2,
-            name: "Safety Certification",
-            issuedDate: "2022-06-10",
-            expiryDate: "2023-06-10",
-            status: "Expired",
-            reminder: "Already expired"
-        }
-    ];
-
-    // Philippine Time Display
-    function updatePhilippineTime() {
-        const now = new Date();
-        const phTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Manila"}));
-        const options = {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            timeZone: 'Asia/Manila'
-        };
-        document.getElementById('philippineTime').textContent = phTime.toLocaleDateString('en-PH', options);
-    }
-
-    setInterval(updatePhilippineTime, 1000);
-    updatePhilippineTime();
-
     // Toggle submenu function
     function toggleSubmenu(id) {
         const submenu = document.getElementById(id);
@@ -861,25 +996,46 @@
     // Close notification dropdown when clicking outside
     document.addEventListener('click', function(event) {
         const dropdown = document.getElementById('notification-dropdown');
-        const notificationButton = document.querySelector('[onclick="toggleNotification()"]');
+        const button = event.target.closest('button');
 
-        if (!notificationButton.contains(event.target) && !dropdown.contains(event.target)) {
+        if (!button || !button.querySelector('svg')) {
             dropdown.classList.remove('open');
         }
     });
 
+    // Philippine Time Display
+    function updatePhilippineTime() {
+        const now = new Date();
+        const options = {
+            timeZone: 'Asia/Manila',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        const phTime = now.toLocaleString('en-PH', options);
+        document.getElementById('philippineTime').textContent = phTime;
+    }
+
+    // Update time every second
+    setInterval(updatePhilippineTime, 1000);
+    updatePhilippineTime();
+
     // Tab switching functionality
     function switchTab(tabName) {
         // Hide all tab contents
-        document.querySelectorAll('.tab-content').forEach(tab => {
-            tab.classList.remove('active');
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(content => {
+            content.classList.remove('active');
         });
 
         // Remove active class from all tabs
-        document.querySelectorAll('#competency-tabs button').forEach(tab => {
+        const tabs = document.querySelectorAll('#competency-tabs button');
+        tabs.forEach(tab => {
             tab.classList.remove('active-tab');
-            tab.classList.remove('border-blue-600');
-            tab.classList.remove('text-blue-600');
+            tab.classList.remove('border-blue-600', 'text-blue-600');
         });
 
         // Show selected tab content
@@ -889,110 +1045,21 @@
         document.getElementById(`${tabName}-tab`).classList.add('active-tab', 'border-blue-600', 'text-blue-600');
     }
 
-    // Initialize the certifications table
-    function renderCertificationsTable() {
-        const tbody = document.getElementById('certifications-table-body');
-        tbody.innerHTML = '';
+    // Initialize with certification tab active
+    document.addEventListener('DOMContentLoaded', function() {
+        switchTab('certification');
+    });
 
-        certifications.forEach(cert => {
-            const row = document.createElement('tr');
-            row.className = 'bg-white border-b';
-            row.innerHTML = `
-                <td class="px-4 py-4 font-medium text-gray-900">${cert.name}</td>
-                <td class="px-4 py-4">${formatDate(cert.issuedDate)}</td>
-                <td class="px-4 py-4">${formatDate(cert.expiryDate)}</td>
-                <td class="px-4 py-4">
-                    <span class="status-badge ${getStatusClass(cert.status)}">${cert.status}</span>
-                </td>
-                <td class="px-4 py-4">${cert.reminder}</td>
-            `;
-            tbody.appendChild(row);
-        });
-    }
-
-    // Format date to readable format
-    function formatDate(dateString) {
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString('en-US', options);
-    }
-
-    // Get status class based on status text
-    function getStatusClass(status) {
-        switch(status) {
-            case 'Valid': return 'status-valid';
-            case 'Expired': return 'status-expired';
-            case 'Pending': return 'status-pending';
-            default: return 'status-active';
-        }
-    }
-
-    // Modal functions
-    function openUploadModal() {
-        document.getElementById('upload-modal').style.display = 'flex';
-    }
-
-    function closeUploadModal() {
-        document.getElementById('upload-modal').style.display = 'none';
-        document.getElementById('upload-form').reset();
-        document.getElementById('file-name').textContent = '';
-    }
-
-    // Handle file selection
+    // Handle file selection for certification upload
     function handleFileSelect(event) {
         const file = event.target.files[0];
         if (file) {
-            document.getElementById('file-name').textContent = `Selected file: ${file.name}`;
-        }
-    }
+            // In a real application, you would upload the file to a server here
+            // For this demo, we'll just show a success message
+            showAlert('success', 'Certification uploaded successfully!');
 
-    // Submit certification
-    function submitCertification() {
-        const type = document.getElementById('certification-type').value;
-        const issuedDate = document.getElementById('issued-date').value;
-        const expiryDate = document.getElementById('expiry-date').value;
-        const fileInput = document.getElementById('modal-file-input');
-
-        if (!type || !issuedDate || !expiryDate || !fileInput.files[0]) {
-            showAlert('error', 'Please fill in all fields and select a file.');
-            return;
-        }
-
-        // Create new certification object
-        const newCert = {
-            id: certifications.length + 1,
-            name: type,
-            issuedDate: issuedDate,
-            expiryDate: expiryDate,
-            status: new Date(expiryDate) > new Date() ? 'Valid' : 'Expired',
-            reminder: calculateReminder(expiryDate)
-        };
-
-        // Add to certifications array
-        certifications.push(newCert);
-
-        // Update table
-        renderCertificationsTable();
-
-        // Close modal and show success message
-        closeUploadModal();
-        showAlert('success', 'Certification uploaded successfully!');
-    }
-
-    // Calculate reminder text based on expiry date
-    function calculateReminder(expiryDate) {
-        const today = new Date();
-        const expiry = new Date(expiryDate);
-        const diffTime = expiry - today;
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-        if (diffDays < 0) {
-            return 'Already expired';
-        } else if (diffDays < 30) {
-            return 'Expires soon';
-        } else if (diffDays < 90) {
-            return '3 months before expiry';
-        } else {
-            return '6 months before expiry';
+            // Reset the file input
+            event.target.value = '';
         }
     }
 
@@ -1002,18 +1069,103 @@
         alert.textContent = message;
         alert.style.display = 'block';
 
+        // Hide alert after 5 seconds
         setTimeout(() => {
             alert.style.display = 'none';
         }, 5000);
     }
 
-    // Initialize the page
-    document.addEventListener('DOMContentLoaded', function() {
-        renderCertificationsTable();
-        switchTab('certification');
+    // Employee List Modal functions
+    function openEmployeeListModal() {
+        document.getElementById('employee-list-modal').style.display = 'flex';
+    }
 
-        // Set up file input event listeners
-        document.getElementById('modal-file-input').addEventListener('change', handleFileSelect);
+    function closeEmployeeListModal() {
+        document.getElementById('employee-list-modal').style.display = 'none';
+    }
+
+    // Select employee function
+    function selectEmployee(employeeName) {
+        // In a real application, you would load the selected employee's data
+        // For this demo, we'll just show an alert and close the modal
+        showAlert('success', `Selected employee: ${employeeName}`);
+        closeEmployeeListModal();
+
+        // Update the current employee name in the profile card
+        document.querySelector('.profile-card h2').textContent = employeeName;
+    }
+
+    // Certification Modal functions
+    function openModal() {
+        document.getElementById('certification-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('certification-modal').style.display = 'none';
+    }
+
+    // Handle certification form submission
+    document.getElementById('certification-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('certification-name').value;
+        const issuedDate = document.getElementById('issued-date').value;
+        const expiryDate = document.getElementById('expiry-date').value;
+
+        // Format dates for display
+        const issued = new Date(issuedDate).toLocaleDateString();
+        const expiry = expiryDate ? new Date(expiryDate).toLocaleDateString() : 'N/A';
+
+        // Determine status based on expiry date
+        let status = 'Valid';
+        let statusClass = 'status-valid';
+
+        if (expiryDate) {
+            const today = new Date();
+            const expiryDateObj = new Date(expiryDate);
+
+            if (expiryDateObj < today) {
+                status = 'Expired';
+                statusClass = 'status-expired';
+            } else if ((expiryDateObj - today) / (1000 * 60 * 60 * 24) < 30) {
+                status = 'Expiring Soon';
+                statusClass = 'status-pending';
+            }
+        }
+
+        // Add new certification to the table
+        const tableBody = document.getElementById('certifications-table-body');
+        const newRow = document.createElement('tr');
+        newRow.className = 'bg-white border-b hover:bg-gray-50';
+        newRow.innerHTML = `
+            <td class="px-4 py-4 font-medium text-gray-900">${name}</td>
+            <td class="px-4 py-4">${issued}</td>
+            <td class="px-4 py-4">${expiry}</td>
+            <td class="px-4 py-4"><span class="status-badge ${statusClass}">${status}</span></td>
+        `;
+        tableBody.appendChild(newRow);
+
+        // Close modal and reset form
+        closeModal();
+        document.getElementById('certification-form').reset();
+
+        // Show success message
+        showAlert('success', 'Certification added successfully!');
+    });
+
+    // Employee search functionality
+    document.getElementById('employee-search').addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const employeeCards = document.querySelectorAll('.employee-card');
+
+        employeeCards.forEach(card => {
+            const employeeName = card.querySelector('h4').textContent.toLowerCase();
+            if (employeeName.includes(searchTerm)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
     });
 </script>
 </body>
