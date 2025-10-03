@@ -282,7 +282,7 @@
     <div class="h-full px-4 pb-4 overflow-y-auto bg-black shadow">
         <!-- Title -->
         <div class="flex justify-center items-center mb-6">
-            <h1 class="text-3xl font-bold text-white tracking-wide">Human Resource 2</h1>
+            <h1 class="text-3xl font-bold text-white tracking-wide">Human Resource 2 TEST</h1>
         </div>
 
         <!-- Navigation Links -->
