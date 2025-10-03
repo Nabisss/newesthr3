@@ -1,12 +1,19 @@
 <?php
+session_start();
 require_once '../config.php';
+
+// Ensure user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: /login.php"); // redirect to login if not logged in
+    exit();
+}
 
 $user_id = $_SESSION['user_id'];
 $db = getDB();
 
 // Handle course enrollment
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enroll_course'])) {
-    $course_id = $_POST['course_id'];
+    $course_id = intval($_POST['course_id']);
 
     // Check if user is already enrolled
     $stmt = $db->prepare("SELECT * FROM user_courses WHERE user_id = ? AND course_id = ?");
@@ -14,7 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enroll_course'])) {
 
     if ($stmt->rowCount() == 0) {
         // Enroll user in the course
-        $stmt = $db->prepare("INSERT INTO user_courses (user_id, course_id, status, progress, enrolled_at) VALUES (?, ?, 'not_started', 0, NOW())");
+        $stmt = $db->prepare("
+            INSERT INTO user_courses (user_id, course_id, status, progress, enrolled_at)
+            VALUES (?, ?, 'not_started', 0, NOW())
+        ");
         if ($stmt->execute([$user_id, $course_id])) {
             $_SESSION['message'] = "Course enrolled successfully!";
             $_SESSION['message_type'] = "success";
@@ -47,21 +57,22 @@ $stmt->execute([$user_id]);
 $enrolled_courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Group courses by status
-$in_progress_courses = array_filter($enrolled_courses, function($course) {
-    return $course['status'] == 'in_progress';
-});
-
-$completed_courses = array_filter($enrolled_courses, function($course) {
-    return $course['status'] == 'completed';
-});
-
-$upcoming_courses = array_filter($enrolled_courses, function($course) {
-    return $course['status'] == 'not_started';
-});
+$in_progress_courses = array_filter($enrolled_courses, fn($course) => $course['status'] == 'in_progress');
+$completed_courses  = array_filter($enrolled_courses, fn($course) => $course['status'] == 'completed');
+$upcoming_courses   = array_filter($enrolled_courses, fn($course) => $course['status'] == 'not_started');
 
 // Create an array of enrolled course IDs for easy checking
 $enrolled_course_ids = array_column($enrolled_courses, 'id');
+
+// Display session messages
+if (isset($_SESSION['message'])) {
+    echo '<div class="fixed top-20 right-4 z-50 p-4 mb-4 text-sm text-' .
+         $_SESSION['message_type'] . '-800 bg-' . $_SESSION['message_type'] .
+         '-100 rounded-lg" role="alert">' . $_SESSION['message'] . '</div>';
+    unset($_SESSION['message'], $_SESSION['message_type']);
+}
 ?>
+
     <!DOCTYPE html>
     <html lang="en">
     <head>
