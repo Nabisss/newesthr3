@@ -2,11 +2,18 @@
 // config.php
 session_start();
 
-// Database configuration
+// Database configuration # UNCOMMENT MO LANG TO PAG ISASALPAK MO NA SA DOMAIN
+// define('DB_HOST', 'localhost');
+// define('DB_NAME', 'hr2_hr2db');
+// define('DB_USER', 'hr2_hr2db');
+// define('DB_PASS', 'hr2db'); // Keep empty if no password, otherwise add your password
+
+# TAPOS ITO SA LOCALHOST
+
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'hr2_hr2db');
-define('DB_USER', 'hr2_hr2db');
-define('DB_PASS', 'hr2db'); // Keep empty if no password, otherwise add your password
+define('DB_NAME', 'calicrane_training');
+define('DB_USER', 'root');
+define('DB_PASS', ''); // Keep empty if no password, otherwise add your password
 
 // Create database connection
 function getDB() {

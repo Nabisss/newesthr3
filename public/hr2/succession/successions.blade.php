@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Succession Planning Dashboard</title>
+    <title>Succession Planning</title>
     <style>
         .submenu {
             max-height: 0;
@@ -614,10 +614,11 @@
                     <div class="flex gap-2">
                         <input type="text" class="search-box" placeholder="Search positions...">
                         <select class="filter-control">
-                            <option>All Departments</option>
-                            <option>Tools & Equipment</option>
-                            <option>Customer Service</option>
-                            <option>Crane & Truck Monitoring</option>
+                            <option>Administrator</option>
+                            <option>HR 1</option>
+                            <option>HR 3</option>
+                            <option>HR 4</option>
+                            <option>Financial</option>
                         </select>
                     </div>
                 </div>
